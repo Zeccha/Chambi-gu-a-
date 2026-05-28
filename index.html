@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía de Juegos de Mesa — Chambi Club</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#354D61;--navy-deep:#2C4055;--navy-deeper:#223448;--navy-light:#3F5A70;
+  --cream:#F7F3EC;--cream-dim:rgba(247,243,236,0.75);--cream-faint:rgba(247,243,236,0.4);--cream-ghost:rgba(247,243,236,0.1);
+  --gold:#C9A45A;--gold-dim:rgba(201,164,90,0.7);--gold-bg:rgba(201,164,90,0.12);
+  --border:rgba(247,243,236,0.1);--border-mid:rgba(247,243,236,0.22);
+  --font-serif:'Cormorant Garamond',Georgia,serif;--font-sans:'DM Sans',system-ui,sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-sans);background:var(--navy);color:var(--cream);font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+nav{position:sticky;top:0;background:var(--navy-deeper);border-bottom:1px solid var(--border);z-index:100;padding:0 5vw}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px;gap:2rem}
+.nav-logo{font-family:var(--font-serif);font-size:22px;font-weight:400;letter-spacing:0.04em;color:var(--cream);text-decoration:none}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-size:12px;color:var(--cream-faint);text-decoration:none;letter-spacing:0.1em;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:var(--cream)}
+.nav-cta{font-size:12px;font-weight:500;color:var(--navy-deeper);background:var(--gold);border:none;padding:8px 20px;border-radius:2px;cursor:pointer;text-decoration:none;letter-spacing:0.06em;text-transform:uppercase;transition:opacity .2s}
+.nav-cta:hover{opacity:0.88}
+.hero{padding:90px 5vw 70px;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:end}
+.hero-label{font-size:11px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem}
+.hero h1{font-family:var(--font-serif);font-size:clamp(50px,5.5vw,78px);font-weight:300;line-height:1.0;color:var(--cream)}
+.hero h1 em{font-style:italic;color:var(--gold)}
+.hero-intro{font-family:var(--font-serif);font-size:21px;font-weight:300;line-height:1.65;color:var(--cream-dim);margin-bottom:2rem}
+.hero-intro strong{font-weight:500;color:var(--cream)}
+.hero-stats{display:flex;gap:2.5rem;border-top:1px solid var(--border);padding-top:1.5rem}
+.stat-num{font-family:var(--font-serif);font-size:36px;font-weight:300;color:var(--gold);line-height:1;display:block}
+.stat-label{font-size:11px;color:var(--cream-faint);letter-spacing:0.06em;display:block;margin-top:4px}
+.hr-full{border:none;border-top:1px solid var(--border);max-width:1100px;margin:0 auto}
+.cat-nav{background:var(--navy-deep);border-bottom:1px solid var(--border);padding:0 5vw;overflow-x:auto;scrollbar-width:none}
+.cat-nav::-webkit-scrollbar{display:none}
+.cat-nav-inner{max-width:1100px;margin:0 auto;display:flex;gap:0;white-space:nowrap}
+.cat-btn{font-family:var(--font-sans);font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;padding:14px 22px;background:transparent;border:none;border-bottom:2px solid transparent;color:var(--cream-faint);cursor:pointer;transition:all .2s}
+.cat-btn:hover{color:var(--cream)}
+.cat-btn.active{color:var(--gold);border-bottom-color:var(--gold)}
+.cat-section{display:none}
+.cat-section.visible{display:block}
+section{padding:80px 5vw}
+.container{max-width:1100px;margin:0 auto}
+.section-label{font-size:11px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem}
+.section-title{font-family:var(--font-serif);font-size:clamp(34px,4vw,52px);font-weight:300;line-height:1.1;color:var(--cream);margin-bottom:1rem}
+.section-title em{font-style:italic;color:var(--gold)}
+.section-sub{font-size:16px;color:var(--cream-dim);max-width:580px;line-height:1.75;margin-bottom:3rem}
+.dark-section{background:var(--navy-deeper);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:var(--border)}
+.feature-card{background:var(--navy);padding:1.75rem;transition:background .2s}
+.feature-card:hover{background:var(--navy-light)}
+.feature-icon{font-size:22px;margin-bottom:.9rem;display:block}
+.feature-title{font-family:var(--font-serif);font-size:18px;font-weight:500;color:var(--cream);margin-bottom:0.4rem}
+.feature-desc{font-size:13px;color:var(--cream-dim);line-height:1.65}
+.filter-tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2rem}
+.filter-btn{font-family:var(--font-sans);font-size:12px;padding:5px 14px;border:1px solid var(--border);background:transparent;color:var(--cream-faint);border-radius:2px;cursor:pointer;transition:all .15s;letter-spacing:0.04em}
+.filter-btn:hover{border-color:var(--border-mid);color:var(--cream)}
+.filter-btn.active{background:var(--gold-bg);color:var(--gold);border-color:rgba(201,164,90,0.35)}
+.games-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:1.25rem}
+.game-card{background:var(--navy-deep);border:1px solid var(--border);border-radius:2px;overflow:hidden;transition:border-color .2s,transform .2s}
+.game-card:hover{border-color:var(--border-mid);transform:translateY(-2px)}
+.game-card.hidden{display:none}
+.game-card-header{padding:1.5rem 1.5rem 0;display:flex;gap:1rem;align-items:flex-start}
+.game-icon{width:50px;height:50px;border-radius:2px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:22px;background:var(--cream-ghost)}
+.game-meta{flex:1}
+.game-title{font-family:var(--font-serif);font-size:18px;font-weight:500;color:var(--cream);line-height:1.2;margin-bottom:3px}
+.game-subtitle{font-size:11px;color:var(--cream-faint);letter-spacing:0.05em;text-transform:uppercase}
+.game-body{padding:.9rem 1.5rem 1.1rem}
+.game-desc{font-size:14px;color:var(--cream-dim);line-height:1.65;margin-bottom:.9rem}
+.game-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:.9rem}
+.tag{font-size:10px;font-weight:500;letter-spacing:0.07em;padding:3px 9px;border-radius:2px;text-transform:uppercase}
+.tag-mech{background:rgba(201,164,90,0.15);color:var(--gold)}
+.tag-theme{background:rgba(247,243,236,0.08);color:var(--cream-dim)}
+.tag-easy{background:rgba(80,160,100,0.2);color:#7DC98A}
+.tag-med{background:rgba(201,140,60,0.2);color:#D4956A}
+.tag-hard{background:rgba(180,80,80,0.2);color:#D47A7A}
+.game-footer{border-top:1px solid var(--border);padding:9px 1.5rem;display:flex;align-items:center;justify-content:space-between}
+.game-rating{font-family:var(--font-serif);font-size:15px;color:var(--cream-dim)}
+.game-rating span{color:var(--gold)}
+.game-info{font-size:12px;color:var(--cream-faint)}
+.mechanics-list{list-style:none;border-top:1px solid var(--border)}
+.mechanic-item{border-bottom:1px solid var(--border)}
+.mechanic-trigger{width:100%;background:none;border:none;padding:1.1rem 0;display:flex;align-items:center;justify-content:space-between;cursor:pointer;text-align:left;gap:1rem}
+.mechanic-name{font-family:var(--font-serif);font-size:19px;font-weight:400;color:var(--cream)}
+.mechanic-arrow{font-size:18px;color:var(--cream-faint);transition:transform .25s;flex-shrink:0}
+.mechanic-item.open .mechanic-arrow{transform:rotate(180deg);color:var(--gold)}
+.mechanic-item.open .mechanic-name{color:var(--gold)}
+.mechanic-body{display:none;padding:0 0 1.3rem}
+.mechanic-item.open .mechanic-body{display:block}
+.mechanic-desc{font-size:14px;color:var(--cream-dim);line-height:1.7;margin-bottom:.5rem}
+.mechanic-example{font-size:12px;color:var(--gold-dim);font-style:italic}
+.versus-grid{display:grid;grid-template-columns:1fr 48px 1fr;gap:0;align-items:stretch}
+.versus-col{padding:2rem}
+.versus-col.hl{background:var(--gold-bg);border:1px solid rgba(201,164,90,0.25);border-radius:2px}
+.versus-mid{display:flex;align-items:center;justify-content:center;font-family:var(--font-serif);font-size:22px;font-weight:300;color:var(--cream-faint);font-style:italic}
+.versus-col-label{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:1rem;font-weight:500;color:var(--cream-faint)}
+.versus-col-title{font-family:var(--font-serif);font-size:26px;font-weight:400;margin-bottom:1.2rem;color:var(--cream)}
+.versus-col-title.gold{color:var(--gold)}
+.versus-list{list-style:none}
+.versus-list li{font-size:14px;padding:7px 0;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:8px;color:var(--cream-dim)}
+.versus-list li:last-child{border-bottom:none}
+.vdot{width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:8px}
+.vdot.gold{background:var(--gold)}
+.vdot.dim{background:var(--cream-faint)}
+.timeline{position:relative;padding-left:2rem}
+.timeline::before{content:'';position:absolute;left:7px;top:8px;bottom:8px;width:1px;background:var(--border)}
+.timeline-item{position:relative;padding-bottom:2.5rem}
+.timeline-item::before{content:'';position:absolute;left:-1.75rem;top:8px;width:9px;height:9px;border-radius:50%;background:var(--gold);border:2px solid var(--navy-deeper);outline:1px solid var(--gold)}
+.timeline-year{font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:.3rem}
+.timeline-title{font-family:var(--font-serif);font-size:19px;font-weight:400;color:var(--cream);margin-bottom:.4rem}
+.timeline-text{font-size:14px;color:var(--cream-dim);line-height:1.65}
+.path-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--border)}
+.path-step{background:var(--navy-deep);padding:2rem 1.75rem}
+.path-number{font-family:var(--font-serif);font-size:52px;font-weight:300;color:var(--cream-ghost);line-height:1;margin-bottom:.5rem;display:block}
+.path-title{font-family:var(--font-serif);font-size:18px;font-weight:500;color:var(--cream);margin-bottom:.4rem}
+.path-desc{font-size:13px;color:var(--cream-dim);line-height:1.65;margin-bottom:.8rem}
+.path-game{font-size:12px;font-weight:500;color:var(--gold);letter-spacing:0.06em;text-transform:uppercase}
+.path-game::before{content:'→ '}
+.quiz-box{background:var(--navy-deep);border:1px solid var(--border);border-radius:2px;padding:2.25rem;max-width:580px}
+.quiz-q{font-family:var(--font-serif);font-size:21px;font-weight:400;color:var(--cream);margin-bottom:1.3rem;line-height:1.4}
+.quiz-options{display:flex;flex-direction:column;gap:8px;margin-bottom:1.3rem}
+.quiz-opt{background:var(--cream-ghost);border:1px solid var(--border);border-radius:2px;padding:11px 15px;cursor:pointer;text-align:left;font-family:var(--font-sans);font-size:14px;color:var(--cream-dim);transition:all .15s;display:flex;align-items:center;gap:11px}
+.quiz-opt:hover{border-color:var(--border-mid);color:var(--cream)}
+.quiz-opt.selected{border-color:var(--gold);background:var(--gold-bg);color:var(--cream)}
+.quiz-opt-letter{font-family:var(--font-serif);font-size:17px;color:var(--gold);width:22px;text-align:center;flex-shrink:0}
+.quiz-prog{display:flex;gap:5px;margin-bottom:1.3rem}
+.quiz-dot{width:22px;height:2px;background:var(--border);border-radius:2px;transition:background .2s}
+.quiz-dot.done{background:var(--gold-dim)}
+.quiz-dot.active{background:var(--gold)}
+.qbtn{font-family:var(--font-sans);font-size:13px;font-weight:500;padding:10px 22px;background:var(--gold);color:var(--navy-deeper);border:none;border-radius:2px;cursor:pointer;transition:opacity .2s}
+.qbtn:disabled{opacity:0.3;cursor:not-allowed}
+.qbtn:not(:disabled):hover{opacity:.88}
+.qbtn-out{font-family:var(--font-sans);font-size:13px;padding:10px 22px;background:transparent;color:var(--cream-dim);border:1px solid var(--border-mid);border-radius:2px;cursor:pointer;transition:all .2s;text-decoration:none}
+.qbtn-out:hover{border-color:var(--cream-faint);color:var(--cream)}
+.qresult{display:none;text-align:center;padding-top:.5rem}
+.qresult-cat{font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem}
+.qresult-title{font-family:var(--font-serif);font-size:30px;font-weight:300;color:var(--cream);margin-bottom:.9rem}
+.qresult-desc{font-size:14px;color:var(--cream-dim);margin-bottom:1.5rem;line-height:1.7}
+.cta-section{padding:100px 5vw;text-align:center;background:var(--navy-deeper);border-top:1px solid var(--border)}
+.cta-title{font-family:var(--font-serif);font-size:clamp(38px,5vw,62px);font-weight:300;font-style:italic;color:var(--cream);margin-bottom:1.3rem;line-height:1.1}
+.cta-sub{font-size:16px;color:var(--cream-dim);max-width:440px;margin:0 auto 2.5rem;line-height:1.7}
+.cta-buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-gold{font-size:13px;font-weight:500;padding:12px 30px;background:var(--gold);color:var(--navy-deeper);border:none;border-radius:2px;cursor:pointer;text-decoration:none;transition:opacity .2s;letter-spacing:0.06em;text-transform:uppercase}
+.btn-gold:hover{opacity:.88}
+.btn-out{font-size:13px;padding:12px 30px;background:transparent;color:var(--cream-dim);border:1px solid var(--border-mid);border-radius:2px;text-decoration:none;transition:all .2s;letter-spacing:0.06em;text-transform:uppercase}
+.btn-out:hover{border-color:var(--cream-faint);color:var(--cream)}
+footer{border-top:1px solid var(--border);padding:1.75rem 5vw}
+.footer-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.footer-logo{font-family:var(--font-serif);font-size:18px;color:var(--cream-faint)}
+.footer-note{font-size:12px;color:var(--cream-faint);opacity:.5}
+.cat-badge{display:inline-flex;align-items:center;gap:8px;padding:5px 14px;border:1px solid var(--border);border-radius:2px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--cream-faint);margin-bottom:1.5rem}
+.cat-badge-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.note{font-size:12px;color:var(--cream-faint);margin-top:1.2rem;font-style:italic}
+@media(max-width:768px){.hero,.two-col{grid-template-columns:1fr;gap:2rem}.versus-grid{grid-template-columns:1fr}.versus-mid{display:none}.nav-links{display:none}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="#">Chambi Club</a>
+    <ul class="nav-links">
+      <li><a href="#categorias">Categorías</a></li>
+      <li><a href="#historia">Historia</a></li>
+      <li><a href="#ruta">Tu ruta</a></li>
+      <li><a href="#quiz">Quiz</a></li>
+    </ul>
+    <a class="nav-cta" href="https://chambiclub.com/tienda">Ver catálogo</a>
+  </div>
+</nav>
+
+<div style="max-width:1100px;margin:0 auto;padding:0 5vw">
+  <div class="hero" style="padding-left:0;padding-right:0;max-width:100%">
+    <div>
+      <p class="hero-label">Guía completa · Chambi Club</p>
+      <h1>El universo<br>de los <em>juegos<br>modernos</em></h1>
+    </div>
+    <div>
+      <p class="hero-intro">No todos los juegos de mesa son iguales. Desde la estrategia pura de un eurojuego hasta el caos de un party game: <strong>aquí entiendes qué es cada cosa</strong> y cuál es para ti.</p>
+      <div class="hero-stats">
+        <div><span class="stat-num">6</span><span class="stat-label">Categorías explicadas</span></div>
+        <div><span class="stat-num">30+</span><span class="stat-label">Juegos documentados</span></div>
+        <div><span class="stat-num">1979</span><span class="stat-label">Año de origen del hobby</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+<hr class="hr-full">
+
+<div class="cat-nav" id="categorias">
+  <div class="cat-nav-inner">
+    <button class="cat-btn active" onclick="showCat('euro',this)">⚙️ Eurojuegos</button>
+    <button class="cat-btn" onclick="showCat('ameri',this)">🗡️ Ameritrash</button>
+    <button class="cat-btn" onclick="showCat('party',this)">🎉 Party Games</button>
+    <button class="cat-btn" onclick="showCat('coop',this)">🤝 Cooperativos</button>
+    <button class="cat-btn" onclick="showCat('abstract',this)">◼ Abstractos</button>
+    <button class="cat-btn" onclick="showCat('filler',this)">⚡ Fillers</button>
+  </div>
+</div>
+
+<!-- EURO -->
+<div id="cat-euro" class="cat-section visible">
+  <section>
+    <div class="container">
+      <div class="cat-badge"><span class="cat-badge-dot" style="background:var(--gold)"></span>Eurojuegos · German-style games</div>
+      <div class="two-col">
+        <div>
+          <p class="section-label">Definición</p>
+          <h2 class="section-title">Estrategia sobre <em>todo</em></h2>
+          <p class="section-sub">Nacidos en Alemania en los años 80, los eurojuegos priorizan la toma de decisiones estratégicas sobre la suerte o el combate directo. También llamados <em style="color:var(--cream)">German-style games</em>.</p>
+          <p style="font-size:14px;color:var(--cream-dim);line-height:1.75">El <em style="color:var(--cream)">Spiel des Jahres</em> (Premio al Juego del Año alemán, fundado en 1979) es el Oscar del género y el principal termómetro de calidad del hobby.</p>
+        </div>
+        <div class="features-grid" style="grid-template-columns:1fr 1fr">
+          <div class="feature-card"><span class="feature-icon">⚙️</span><p class="feature-title">Mecánicas al frente</p><p class="feature-desc">El sistema de reglas es el protagonista. El tema es casi decorativo.</p></div>
+          <div class="feature-card"><span class="feature-icon">🧩</span><p class="feature-title">Conflicto indirecto</p><p class="feature-desc">Compites por espacios y recursos, nunca atacas al otro jugador.</p></div>
+          <div class="feature-card"><span class="feature-icon">🎯</span><p class="feature-title">Azar controlado</p><p class="feature-desc">Si hay dados o cartas, existen sistemas que mitigan la mala suerte.</p></div>
+          <div class="feature-card"><span class="feature-icon">📊</span><p class="feature-title">Múltiples caminos</p><p class="feature-desc">No hay un solo camino al triunfo. La rejugabilidad es alta.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="dark-section">
+    <div class="container">
+      <p class="section-label">Mecánicas principales</p>
+      <h2 class="section-title">Cómo <em>funcionan</em> por dentro</h2>
+      <div class="two-col">
+        <p class="section-sub" style="margin-bottom:0">Los eurojuegos se definen por sus mecánicas. Conocerlas te permite elegir mejor y entender qué estás jugando desde el primer turno.</p>
+        <ul class="mechanics-list">
+          <li class="mechanic-item">
+            <button class="mechanic-trigger" onclick="toggleMech(this)"><span class="mechanic-name">Colocación de trabajadores</span><span class="mechanic-arrow">↓</span></button>
+            <div class="mechanic-body"><p class="mechanic-desc">Colocas fichas en espacios del tablero para ejecutar acciones. Los espacios son limitados: si alguien llega antes, ese espacio está bloqueado hasta el siguiente turno. Crea tensión sin combate.</p><p class="mechanic-example">Ejemplos: Agricola (2007), Viticulture (2013), Architects of the West Kingdom (2018)</p></div>
+          </li>
+          <li class="mechanic-item">
+            <button class="mechanic-trigger" onclick="toggleMech(this)"><span class="mechanic-name">Construcción de motor</span><span class="mechanic-arrow">↓</span></button>
+            <div class="mechanic-body"><p class="mechanic-desc">Construyes un conjunto de cartas o acciones que se vuelven más eficientes con el tiempo. Al principio produces poco; al final del juego, tu motor genera puntos casi solo.</p><p class="mechanic-example">Ejemplos: Wingspan (2019), Race for the Galaxy (2007), Gizmos (2018)</p></div>
+          </li>
+          <li class="mechanic-item">
+            <button class="mechanic-trigger" onclick="toggleMech(this)"><span class="mechanic-name">Gestión de recursos</span><span class="mechanic-arrow">↓</span></button>
+            <div class="mechanic-body"><p class="mechanic-desc">Obtienes y administras materiales —carbón, madera, monedas, comida— para construir estructuras o activar acciones. La escasez de recursos es el principal generador de tensión.</p><p class="mechanic-example">Ejemplos: Brass: Birmingham (2018), Catan (1995), Terra Mystica (2012)</p></div>
+          </li>
+          <li class="mechanic-item">
+            <button class="mechanic-trigger" onclick="toggleMech(this)"><span class="mechanic-name">Drafting de cartas</span><span class="mechanic-arrow">↓</span></button>
+            <div class="mechanic-body"><p class="mechanic-desc">Seleccionas cartas de un grupo compartido y las pasas a tus vecinos. Cada carta que tomas es una que el rival no puede tener. Introduce lectura del rival y gestión de información.</p><p class="mechanic-example">Ejemplos: 7 Wonders (2010), Sushi Go! (2013), Sagrada (2017)</p></div>
+          </li>
+          <li class="mechanic-item">
+            <button class="mechanic-trigger" onclick="toggleMech(this)"><span class="mechanic-name">Redes y conexiones</span><span class="mechanic-arrow">↓</span></button>
+            <div class="mechanic-body"><p class="mechanic-desc">Construyes rutas o canales que conectan puntos en el mapa. El valor de tu red depende de lo que conecta y cómo interactúa con las redes rivales. Alta profundidad estratégica.</p><p class="mechanic-example">Ejemplos: Brass: Birmingham (2018), Ticket to Ride (2004), Power Grid (2004)</p></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <p class="section-label">Títulos de referencia</p>
+      <h2 class="section-title">Los <em>imprescindibles</em> del género</h2>
+      <div class="filter-tabs">
+        <button class="filter-btn active" onclick="filterCards('egrid','todos',this)">Todos</button>
+        <button class="filter-btn" onclick="filterCards('egrid','principiante',this)">Principiante</button>
+        <button class="filter-btn" onclick="filterCards('egrid','intermedio',this)">Intermedio</button>
+        <button class="filter-btn" onclick="filterCards('egrid','avanzado',this)">Avanzado</button>
+      </div>
+      <div class="games-grid" id="egrid">
+        <div class="game-card" data-cat="principiante"><div class="game-card-header"><div class="game-icon">🏝️</div><div class="game-meta"><p class="game-title">Catan</p><p class="game-subtitle">Klaus Teuber · Catan Studio · 1995</p></div></div><div class="game-body"><p class="game-desc">El juego que exportó el modelo alemán al mundo. Colonizas una isla, produces recursos y comercias o construyes contra tus vecinos. El punto de entrada histórico al hobby moderno.</p><div class="game-tags"><span class="tag tag-mech">Comercio</span><span class="tag tag-mech">Recursos</span><span class="tag tag-easy">Fácil</span></div></div><div class="game-footer"><span class="game-rating">BGG <span>★</span> 7.1</span><span class="game-info">3–4 jugadores · 60–120 min</span></div></div>
+        <div class="game-card" data-cat="principiante"><div class="game-card-header"><div class="game-icon">🚂</div><div class="game-meta"><p class="game-title">Ticket to Ride</p><p class="game-subtitle">Alan R. Moon · Days of Wonder · 2004</p></div></div><div class="game-body"><p class="game-desc">Construyes rutas de tren por un mapa para conectar ciudades. Spiel des Jahres 2004. Reglas en 15 minutos, profundidad real. La entrada perfecta a los euros para cualquier familia.</p><div class="game-tags"><span class="tag tag-mech">Redes</span><span class="tag tag-mech">Drafting</span><span class="tag tag-easy">Fácil</span></div></div><div class="game-footer"><span class="game-rating">BGG <span>★</span> 7.4</span><span class="game-info">2–5 jugadores · 45–75 min</span></div></div>
+        <div class="game-card" data-cat="principiante"><div class="game-card-header"><div class="game-icon">🏛️</div><div class="game-meta"><p class="game-title">7 Wonders</p><p class="game-subtitle">Antoine Bauza · Repos Production · 2010</p></div></div><div class="game-body"><p class="game-desc">Civilizaciones antiguas en partidas de 30 minutos. El drafting simultáneo hace que hasta 7 jugadores jueguen al mismo tiempo sin esperas. Kennerspiel des Jahres 2011.</p><div class="game-tags"><span class="tag tag-mech">Drafting</span><span class="tag tag-mech">Civilización</span><span class="tag tag-easy">Fácil</span></div></div><div class="game-footer"><span class="game-rating">BGG <span>★</span> 7.8</span><span class="game-info">2–7 jugadores · 30–45 min</span></div></div>
+        <div class="game-card" data-cat="principiante"><div class="game-card-header"><div class="game-icon">🦅</div><div class="game-meta"><p class="game-title">Wingspan</p><p class="game-subtitle">Elizabeth Hargrave · Stonemaier Games · 2019</p></div></div><div class="game-body"><p class="game-desc">Construyes un santuario de aves con datos ornitológicos reales en cada carta. Motor en cadena que se vuelve más poderoso con el tiempo. Kennerspiel des Jahres 2019. El euro más accesible de su generación.</p><div class="game-tags"><span class="tag tag-mech">Motor</span><span class="tag tag-mech">Naturaleza</span><span class="tag tag-easy">Fácil</span></div></div><div class="game-footer"><span class="game-rating">BGG <span>★</span> 8.1</span><span class="game-info">1–5 jugadores · 40–70 min</span></div></div>
+        <div class="game-card" data-cat="intermedio"><div class="game-card-header"><div class="game-icon">🌾</div><div class="game-meta"><p class="game-title">Agricola</p><p class="game-subtitle">Uwe Rosenberg · Lookout Games · 2007</p></div></div><div class="game-body"><p class="game-desc">Administras una granja medieval con recursos brutalmente escasos. Tu familia crece y exige más comida cada ronda. La colocación de trabajadores llevada a su máxima expresión. Candidato al mejor euro de todos los tiempos.</p><div class="game-tags"><span class="tag tag-mech">Trabajadores</span><span class="tag tag-mech">Recursos</span><span class="tag tag-med">Intermedio</span></div></div><div class="game-footer"><span class="game-rating">BGG <span>★</span> 7.9</span><span class="game-info">1–5 jugadores · 30–150 min</span></div></div>
+        <div class="game-card" data-cat="intermedio"><div class="game-card-header"><div class="game-icon">🍷</div><div class="game-meta"><p class="game-title">Viticulture: Essential Edition</p><p class="game-subtitle">Stegmaier & Parks · Stonemaier Games · 2015</p></div></div><div class="game-body"><p class="game-desc">Gestionas una viña italiana a través de las estaciones del año. Colocación de trabajadores con un tempo narrativo muy elegante. Considerado el mejor punto de entrada a los euros de peso medio.</p><div class="game-tags"><span class="tag tag-mech">Trabajadores</span><span class="tag tag-mech">Recursos</span><span class="tag tag-med">Intermedio</span></div></div><div class="game-footer"><span class="game-rating">BGG <span>★</span> 8.1</span><span class="game-info">1–6 jugadores · 45–90 min</span></div></div>
+        <div class="game-card" data-cat="avanzado"><div class="game-card-header"><div class="game-icon">⚙️</div><div class="game-meta"><p class="game-title">Brass: Birmingham</p><p class="game-subtitle">Lacerda & Wallace · Roxley · 2018</p></div></div><div class="game-body"><p class="game-desc">Redes industriales en la Inglaterra victoriana. Dos eras (canales y ferrocarriles), mercados dinámicos e interdependencia brutal entre jugadores. Fue #1 en BGG durante años. El euro para quienes quieren máxima profundidad.</p><div class="game-tags"><span class="tag tag-mech">Redes</span><span class="tag tag-mech">Economía</span><span class="tag tag-hard">Avanzado</span></div></div><div class="game-footer"><span class="game-rating">BGG <span>★</span> 8.7</span><span class="game-info">2–4 jugadores · 60–120 min</span></div></div>
+        <div class="game-card" data-cat="avanzado"><div class="game-card-header"><div class="game-icon">🦁</div><div class="game-meta"><p class="game-title">Ark Nova</p><p class="game-subtitle">Mathias Wigge · Feuerland Spiele · 2021</p></div></div><div class="game-body"><p class="game-desc">Diseñas un zoológico de conservación animal. Más de 200 cartas únicas, sistema de acciones escalables muy innovador. Actualmente #2 en BGG. El euro más ambicioso de la última década.</p><div class="game-tags"><span class="tag tag-mech">Gestión de mano</span><span class="tag tag-mech">Motor</span><span class="tag tag-hard">Avanzado</span></div></div><div class="game-footer"><span class="game-rating">BGG <span>★</span> 8.6</span><span class="game-info">1–4 jugadores · 90–150 min</span></div></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- AMERITRASH -->
+<div id="cat-ameri" class="cat-section">
+  <section>
+    <div class="container">
+      <div class="cat-badge"><span class="cat-badge-dot" style="background:#D47A7A"></span>Ameritrash · Thematic Games</div>
+      <div class="two-col">
+        <div>
+          <p class="section-label">Definición</p>
+          <h2 class="section-title">Narrativa, <em>emoción</em> y caos</h2>
+          <p class="section-sub">El término nació como crítica pero la comunidad lo adoptó con orgullo. Son juegos donde <strong style="color:var(--cream)">la historia importa tanto como ganar</strong>. Hoy también se llaman juegos temáticos.</p>
+          <p style="font-size:14px;color:var(--cream-dim);line-height:1.75">A diferencia de los euros, aquí el tema manda: la ambientación, los personajes y el azar dramático crean momentos que el grupo recuerda por años. La distinción euro/ameri es un espectro, no una regla absoluta.</p>
+        </div>
+        <div class="features-grid" style="grid-template-columns:1fr 1fr">
+          <div class="feature-card"><span class="feature-icon">📖</span><p class="feature-title">Historia profunda</p><p class="feature-desc">El lore y la narrativa son parte central, no solo decoración.</p></div>
+          <div class="feature-card"><span class="feature-icon">🎲</span><p class="feature-title">Azar dramático</p><p class="feature-desc">Los dados y eventos aleatorios crean momentos de tensión y giros.</p></div>
+          <div class="feature-card"><span class="feature-icon">⚔️</span><p class="feature-title">Combate directo</p><p class="feature-desc">Puedes atacar directamente a otros jugadores. La eliminación es posible.</p></div>
+          <div class="feature-card"><span class="feature-icon">🎭</span><p class="feature-title">Componentes épicos</p><p class="feature-desc">Miniaturas, dados especiales: la producción es parte del juego.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="dark-section">
+    <div class="container">
+      <p class="section-label">Euro vs Ameritrash</p>
+      <h2 class="section-title">Dos filosofías <em>distintas</em></h2>
+      <div class="versus-grid">
+        <div class="versus-col">
+          <p class="versus-col-label">Eurojuegos</p>
+          <p class="versus-col-title">Sistema y estrategia</p>
+          <ul class="versus-list">
+            <li><span class="vdot dim"></span>Mecánica al frente, tema decorativo</li>
+            <li><span class="vdot dim"></span>Azar controlado o casi nulo</li>
+            <li><span class="vdot dim"></span>Nadie queda eliminado</li>
+            <li><span class="vdot dim"></span>Conflicto indirecto por recursos</li>
+            <li><span class="vdot dim"></span>El ganador se decide por puntos</li>
+          </ul>
+        </div>
+        <div class="versus-mid">vs</div>
+        <div class="versus-col hl">
+          <p class="versus-col-label" style="color:var(--gold-dim)">Ameritrash</p>
+          <p class="versus-col-title gold">Narrativa y emoción</p>
+          <ul class="versus-list">
+            <li><span class="vdot gold"></span>Tema profundo con historia y personajes</li>
+            <li><span class="vdot gold"></span>Azar frecuente y dramático</li>
+            <li><span class="vdot gold"></span>Eliminación de jugadores posible</li>
+            <li><span class="vdot gold"></span>Combate directo, traición, alianzas</li>
+            <li><span class="vdot gold"></span>La historia que genera importa más</li>
+          </ul>
+        </div>
+      </div>
+      <p class="note">*Muchos juegos modernos (Gloomhaven, Spirit Island) mezclan ambos estilos. La distinción es orientativa.</p>
+    </div>
+  </section>
+  <section>
+    <div class="container">
+      <p class="section-label">Títulos de referencia</p>
+      <h2 class="section-title">Los <em>clásicos</em> del género temático</h2>
+      <div class="games-grid">
+        <div class="game-card"><div class="game-card-header"><div class="game-icon">🦑</div><div class="game-meta"><p class="game-title">Arkham Horror: El Juego de Cartas</p><p class="game-subtitle">French & Newman · Fantasy Flight · 2016</p></div></div><div class="game-body"><p class="game-desc">LCG cooperativo ambientado en el universo de H.P. Lovecraft. Investigas misterios cósmicos mientras tu cordura se deteriora. Narrativa ramificada: tus decisiones afectan aventuras futuras. Considerado el mejor LCG de todos los tiempos.</p><div class="game-tags"><span class="tag tag-mech">LCG</span><span class="tag tag-theme">Lovecraft</span><span class="tag tag-med">Intermedio</span></div></div><div class="game-footer"><span class="game-rating">BGG <span>★</span> 8.3</span><span class="game-info">1–4 jugadores · 60–120 min</span></div></div>
+        <div class="game-card"><div class="game-card-header"><div class="game-icon">⚔️</div><div class="game-meta"><p class="game-title">Gloomhaven</p><p class="game-subtitle">Isaac Childres · Cephalofair Games · 2017</p></div></div><div class="game-body"><p class="game-desc">Campaña cooperativa de dungeon crawling en un mundo de fantasía oscura. 17 clases de personajes y más de 95 escenarios. Sistema de cartas que elimina casi los dados. Fue #1 en BGG durante 4 años consecutivos.</p><div class="game-tags"><span class="tag tag-mech">Campaña</span><span class="tag tag-theme">Fantasía</span><span class="tag tag-hard">Avanzado</span></div></div><div class="game-footer"><span class="game-rating">BGG <span>★</span> 8.1</span><span class="game-info">1–4 jugadores · 60–120 min/escenario</span></div></div>
+        <div class="game-card"><div class="game-card-header"><div class="game-icon">🌌</div><div class="game-meta"><p class="game-title">Twilight Imperium 4ª Ed.</p><p class="game-subtitle">Christian T. Petersen · Fantasy Flight · 2017</p></div></div><div class="game-body"><p class="game-desc">El juego más épico del hobby. 17 razas alienígenas, guerra interestelar, diplomacia, economía y política en partidas de 8–12 horas. No se juega un Twilight Imperium: se experimenta. Un evento social en sí mismo.</p><div class="game-tags"><span class="tag tag-mech">4X</span><span class="tag tag-theme">Espacial</span><span class="tag tag-hard">Avanzado</span></div></div><div class="game-footer"><span class="game-rating">BGG <span>★</span> 8.7</span><span class="game-info">3–6 jugadores · 4–8 horas</span></div></div>
+        <div class="game-card"><div class="game-card-header"><div class="game-icon">🏚️</div><div class="game-meta"><p class="game-title">Betrayal at House on the Hill</p><p class="game-subtitle">Glasscock et al. · Avalon Hill · 2004</p></div></div><div class="game-body"><p class="game-desc">Exploras una mansión embrujada que se construye aleatoriamente. En algún punto, uno de los jugadores se convierte en el traidor. 50 escenarios distintos (las "Haunts") aseguran que nunca juegues la misma partida dos veces.</p><div class="game-tags"><span class="tag tag-mech">Traidor</span><span class="tag tag-theme">Terror</span><span class="tag tag-easy">Fácil</span></div></div><div class="game-footer"><span class="game-rating">BGG <span>★</span> 6.9</span><span class="game-info">3–6 jugadores · 60–90 min</span></div></div>
+        <div class="game-card"><div class="game-card-header"><div class="game-icon">🚀</div><div class="game-meta"><p class="game-title">Nemesis</p><p class="game-subtitle">Adam Kwapinski · Awaken Realms · 2018</p></div></div><div class="game-body"><p class="game-desc">Sci-fi de supervivencia inspirado en Alien. Semi-cooperativo: cada jugador tiene objetivos secretos, algunos de los cuales requieren que otros fallen. Tensión extrema, miniaturas impresionantes y momentos de terror que el grupo nunca olvidará.</p><div class="game-tags"><span class="tag tag-mech">Semi-coop</span><span class="tag tag-theme">Sci-fi</span><span class="tag tag-hard">Avanzado</span></div></div><div class="game-footer"><span class="game-rating">BGG <span>★</span> 8.0</span><span class="game-info">1–5 jugadores · 90–180 min</span></div></div>
+        <div class="game-card"><div class="game-card-header"><div class="game-icon">👁️</div><div class="game-meta"><p class="game-title">Mansions of Madness 2ª Ed.</p><p class="game-subtitle">Valerie Putman · Fantasy Flight · 2016</p></div></div><div class="game-body"><p class="game-desc">Exploración cooperativa de mansiones lovecraftianas guiada por una app que narra la historia y mueve a los monstruos. Elimina al "dungeon master" sin sacrificar narrativa. Alta producción, puzzles físicos y mucha atmósfera.</p><div class="game-tags"><span class="tag tag-mech">App</span><span class="tag tag-theme">Terror</span><span class="tag tag-med">Intermedio</span></div></div><div class="game-footer"><span class="game-rating">BGG <span>★</span> 7.9</span><span class="game-info">1–5 jugadores · 120–180 min</span></div></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- PARTY -->
+<div id="cat-party" class="cat-section">
+  <section>
+    <div class="container">
+      <div class="cat-badge"><span class="cat-badge-dot" style="background:#7DC98A"></span>Party Games · Juegos de grupo</div>
+      <div class="two-col">
+        <div>
+          <p class="section-label">Definición</p>
+          <h2 class="section-title">La mesa <em>ríe</em>, todos juegan</h2>
+          <p class="section-sub">Accesibles para cualquier persona, con o sin experiencia. Reglas simples, interacción máxima y momentos memorables. Los mejores para introducir a gente que normalmente no juega.</p>
+          <p style="font-size:14px;color:var(--cream-dim);line-height:1.75">No confundas accesible con superficial: <em style="color:var(--cream)">Codenames</em> o <em style="color:var(--cream)">Wavelength</em> son party games con profundidad comunicativa real.</p>
+        </div>
+        <div class="features-grid" style="grid-template-columns:1fr 1fr">
+          <div class="feature-card"><span class="feature-icon">👥</span><p class="feature-title">Para todos</p><p class="feature-desc">Sin experiencia previa. Cualquiera puede jugar desde el primer minuto.</p></div>
+          <div class="feature-card"><span class="feature-icon">⚡</span><p class="feature-title">Setup mínimo</p><p class="feature-desc">Reglas en 5 minutos. Nada de preparación larga ni piezas complicadas.</p></div>
+          <div class="feature-card"><span class="feature-icon">😂</span><p class="feature-title">Interacción total</p><p class="feature-desc">Todo el grupo está involucrado al mismo tiempo. Nadie espera en silencio.</p></div>
+          <div class="feature-card"><span class="feature-icon">🎤</span><p class="feature-title">Comunicación</p><p class="feature-desc">Muchos giran en torno a comunicar ideas de formas inusuales o restringidas.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="dark-section">
+    <div class="container">
+      <p class="section-label">Títulos de referencia</p>
+      <h2 class="section-title">Los <em>esenciales</em> de cualquier colección</h2>
+      <div class="games-grid">
+        <div class="game-card"><div class="game-card-header"><div class="game-icon">🕵️</div><div class="game-meta"><p class="game-title">Codenames</p><p class="game-subtitle">Vlaada Chvátil · Czech Games Edition · 2015</p></div></div><div class="game-body"><p class="game-desc">Dos equipos intentan adivinar palabras con pistas de una sola palabra. El agente da una pista que conecte múltiples palabras suyas sin activar las del rival. Spiel des Jahres 2016. El party game más elegante e intelectual de los últimos años.</p><div class="game-tags"><span class="tag tag-mech">Palabras</span><span class="tag tag-theme">Equipos</span><span class="tag tag-easy">Fácil</span></div></div><div class="game-footer"><span class="game-rating">BGG <span>★</span> 7.7</span><span class="game-info">2–8+ jugadores · 15–30 min</span></div></div>
+        <div class="game-card"><div class="game-card-header"><div class="game-icon">🌊</div><div class="game-meta"><p class="game-title">Wavelength</p><p class="game-subtitle">Alex Hague et al. · Palm Court · 2019</p></div></div><div class="game-body"><p class="game-desc">Un dial oculto apunta a un punto en un espectro entre dos conceptos opuestos. Debes dar una pista y tu equipo adivina dónde está el dial. Genera debates filosóficos y conversaciones inesperadas sobre percepciones distintas.</p><div class="game-tags"><span class="tag tag-mech">Espectro</span><span class="tag tag-theme">Conceptos</span><span class="tag tag-easy">Fácil</span></div></div><div class="game-footer"><span class="game-rating">BGG <span>★</span> 7.5</span><span class="game-info">2–12 jugadores · 30–45 min</span></div></div>
+        <div class="game-card"><div class="game-card-header"><div class="game-icon">🖼️</div><div class="game-meta"><p class="game-title">Dixit</p><p class="game-subtitle">Jean-Louis Roubira · Libellud · 2008</p></div></div><div class="game-body"><p class="game-desc">Cartas de ilustraciones surrealistas. Das una pista —frase, sonido, gesto— para que algunos (no todos) de tus rivales adivinen tu carta. Un ejercicio de comunicación poética. Spiel des Jahres 2010. Ideal para grupos creativos.</p><div class="game-tags"><span class="tag tag-mech">Narrativa</span><span class="tag tag-theme">Arte</span><span class="tag tag-easy">Fácil</span></div></div><div class="game-footer"><span class="game-rating">BGG <span>★</span> 7.2</span><span class="game-info">3–6 jugadores · 30–45 min</span></div></div>
+        <div class="game-card"><div class="game-card-header"><div class="game-icon">☝️</div><div class="game-meta"><p class="game-title">Just One</p><p class="game-subtitle">Roudy & Sautter · Repos Production · 2018</p></div></div><div class="game-body"><p class="game-desc">Cooperativo donde todos escriben UNA pista para el adivinador, pero las pistas repetidas se cancelan. Tensión cooperativa brevísima y muy divertida. Spiel des Jahres 2019. El mejor party game cooperativo del mercado.</p><div class="game-tags"><span class="tag tag-mech">Cooperativo</span><span class="tag tag-theme">Palabras</span><span class="tag tag-easy">Fácil</span></div></div><div class="game-footer"><span class="game-rating">BGG <span>★</span> 7.6</span><span class="game-info">3–7 jugadores · 20–30 min</span></div></div>
+        <div class="game-card"><div class="game-card-header"><div class="game-icon">💣</div><div class="game-meta"><p class="game-title">Coup</p><p class="game-subtitle">Rikki Tahta · Indie Boards & Cards · 2012</p></div></div><div class="game-body"><p class="game-desc">Cada jugador tiene 2 cartas secretas y puede mentir sobre qué cartas tiene para ejecutar acciones poderosas. Si te llaman la mentira, pierdes influencia. Brutal, tenso y adictivo en 15 minutos. Faroleo puro.</p><div class="game-tags"><span class="tag tag-mech">Faroleo</span><span class="tag tag-theme">Deducción</span><span class="tag tag-easy">Fácil</span></div></div><div class="game-footer"><span class="game-rating">BGG <span>★</span> 7.4</span><span class="game-info">2–6 jugadores · 15 min</span></div></div>
+        <div class="game-card"><div class="game-card-header"><div class="game-icon">🎨</div><div class="game-meta"><p class="game-title">Mysterium</p><p class="game-subtitle">Oleksandr Nevskiy · Libellud · 2015</p></div></div><div class="game-body"><p class="game-desc">Un jugador es un fantasma que solo puede comunicarse con visiones ilustradas. Los demás son médiums que descifran el crimen. Cooperativo, hermoso y con un rol asimétrico muy bien logrado. Excelente para no-jugadores.</p><div class="game-tags"><span class="tag tag-mech">Asimétrico</span><span class="tag tag-theme">Misterio</span><span class="tag tag-easy">Fácil</span></div></div><div class="game-footer"><span class="game-rating">BGG <span>★</span> 7.2</span><span class="game-info">2–7 jugadores · 42–60 min</span></div></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- COOP -->
+<div id="cat-coop" class="cat-section">
+  <section>
+    <div class="container">
+      <div class="cat-badge"><span class="cat-badge-dot" style="background:#7A9ED4"></span>Cooperativos · Todos contra el juego</div>
+      <div class="two-col">
+        <div>
+          <p class="section-label">Definición</p>
+          <h2 class="section-title">La mesa como <em>equipo</em></h2>
+          <p class="section-sub">Todos los jugadores ganan o pierden juntos. El rival es el propio juego, que pone obstáculos a través de cartas, eventos o un sistema automático.</p>
+          <p style="font-size:14px;color:var(--cream-dim);line-height:1.75">Ideales para grupos donde alguien no quiere competir, o cuando la dinámica de equipo importa más que un ganador. El desafío: evitar al "jugador alfa" que toma todas las decisiones.</p>
+        </div>
+        <div class="features-grid" style="grid-template-columns:1fr 1fr">
+          <div class="feature-card"><span class="feature-icon">🤝</span><p class="feature-title">Todos ganan o pierden</p><p class="feature-desc">No hay competencia interna. El éxito o fracaso es completamente colectivo.</p></div>
+          <div class="feature-card"><span class="feature-icon">🌊</span><p class="feature-title">El juego como rival</p><p class="feature-desc">Un sistema automático —cartas, tracks, eventos— pone la presión sobre el grupo.</p></div>
+          <div class="feature-card"><span class="feature-icon">💬</span><p class="feature-title">Comunicación esencial</p><p class="feature-desc">Coordinarse es la mecánica principal. Decidir quién hace qué en qué orden.</p></div>
+          <div class="feature-card"><span class="feature-icon">🎭</span><p class="feature-title">Roles diferenciados</p><p class="feature-desc">Los mejores cooperativos dan a cada jugador habilidades únicas.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="dark-section">
+    <div class="container">
+      <p class="section-label">Títulos de referencia</p>
+      <h2 class="section-title">Cooperativos <em>imprescindibles</em></h2>
+      <div class="games-grid">
+        <div class="game-card"><div class="game-card-header"><div class="game-icon">🦠</div><div class="game-meta"><p class="game-title">Pandemic</p><p class="game-subtitle">Matt Leacock · Z-Man Games · 2008</p></div></div><div class="game-body"><p class="game-desc">El cooperativo que popularizó el género. Controlas equipos de la OMS combatiendo 4 enfermedades que se extienden simultáneamente por el mapa mundial. 5 roles distintos con habilidades únicas. Simple de aprender, muy difícil de dominar.</p><div class="game-tags"><span class="tag tag-mech">Roles</span><span class="tag tag-theme">Epidemias</span><span class="tag tag-easy">Fácil</span></div></div><div class="game-footer"><span class="game-rating">BGG <span>★</span> 7.6</span><span class="game-info">2–4 jugadores · 45–60 min</span></div></div>
+        <div class="game-card"><div class="game-card-header"><div class="game-icon">🌿</div><div class="game-meta"><p class="game-title">Spirit Island</p><p class="game-subtitle">R. Eric Reuss · Greater Than Games · 2017</p></div></div><div class="game-body"><p class="game-desc">Espíritus de la naturaleza defienden su isla de la colonización europea. Completamente asimétrico: cada espíritu juega de forma distinta. Escala de dificultad enorme y rejugabilidad casi infinita. El cooperativo más complejo del mercado.</p><div class="game-tags"><span class="tag tag-mech">Asimétrico</span><span class="tag tag-theme">Naturaleza</span><span class="tag tag-hard">Avanzado</span></div></div><div class="game-footer"><span class="game-rating">BGG <span>★</span> 8.4</span><span class="game-info">1–4 jugadores · 90–120 min</span></div></div>
+        <div class="game-card"><div class="game-card-header"><div class="game-icon">🎆</div><div class="game-meta"><p class="game-title">Hanabi</p><p class="game-subtitle">Antoine Bauza · Abacusspiele · 2010</p></div></div><div class="game-body"><p class="game-desc">Sostienes tus cartas al revés: los demás ven tu mano, tú no. El grupo construye fuegos artificiales perfectos compartiendo pistas limitadas. Spiel des Jahres 2013. Minimalismo radical que genera más tensión que juegos de 2 horas.</p><div class="game-tags"><span class="tag tag-mech">Información</span><span class="tag tag-theme">Abstracto</span><span class="tag tag-easy">Fácil</span></div></div><div class="game-footer"><span class="game-rating">BGG <span>★</span> 6.9</span><span class="game-info">2–5 jugadores · 25–30 min</span></div></div>
+        <div class="game-card"><div class="game-card-header"><div class="game-icon">🏔️</div><div class="game-meta"><p class="game-title">Robinson Crusoe</p><p class="game-subtitle">Ignacy Trzewiczek · Portal Games · 2012</p></div></div><div class="game-body"><p class="game-desc">Supervivencia en una isla desierta con exploración, construcción y crisis constantes. Muy difícil: el juego gana frecuentemente. Escenarios distintos con condiciones únicas. La experiencia de supervivencia más auténtica del hobby.</p><div class="game-tags"><span class="tag tag-mech">Supervivencia</span><span class="tag tag-theme">Exploración</span><span class="tag tag-hard">Avanzado</span></div></div><div class="game-footer"><span class="game-rating">BGG <span>★</span> 7.8</span><span class="game-info">1–4 jugadores · 60–120 min</span></div></div>
+        <div class="game-card"><div class="game-card-header"><div class="game-icon">🌅</div><div class="game-meta"><p class="game-title">The Crew: Quest for Planet Nine</p><p class="game-subtitle">Thomas Sing · Kosmos · 2019</p></div></div><div class="game-body"><p class="game-desc">Cooperativo de cartas con mecánica de bazas. 50 misiones con dificultad progresiva. La comunicación está severamente restringida: solo una señal por turno. Kennerspiel des Jahres 2020. Ideal para amantes de los juegos de cartas clásicos.</p><div class="game-tags"><span class="tag tag-mech">Bazas</span><span class="tag tag-theme">Espacio</span><span class="tag tag-med">Intermedio</span></div></div><div class="game-footer"><span class="game-rating">BGG <span>★</span> 7.7</span><span class="game-info">2–5 jugadores · 20 min</span></div></div>
+        <div class="game-card"><div class="game-card-header"><div class="game-icon">🏰</div><div class="game-meta"><p class="game-title">Aeon's End</p><p class="game-subtitle">Kevin Riley · Action Phase Games · 2016</p></div></div><div class="game-body"><p class="game-desc">Deckbuilding cooperativo donde los magos defienden su ciudad de nemeses colosos. Sin barajar el mazo: el orden de descarte importa. Sistema de turno aleatorio que aumenta la tensión. Una de las mejores implementaciones de deckbuilding cooperativo.</p><div class="game-tags"><span class="tag tag-mech">Deckbuilding</span><span class="tag tag-theme">Fantasía</span><span class="tag tag-med">Intermedio</span></div></div><div class="game-footer"><span class="game-rating">BGG <span>★</span> 7.9</span><span class="game-info">1–4 jugadores · 60–90 min</span></div></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ABSTRACTOS -->
+<div id="cat-abstract" class="cat-section">
+  <section>
+    <div class="container">
+      <div class="cat-badge"><span class="cat-badge-dot" style="background:#B5AFA5"></span>Abstractos · Pura estrategia sin tema</div>
+      <div class="two-col">
+        <div>
+          <p class="section-label">Definición</p>
+          <h2 class="section-title">Sin historia, solo <em>cerebro</em></h2>
+          <p class="section-sub">Los abstractos eliminan el tema por completo. No hay narrativa ni lore. Solo mecánicas puras, información perfecta y decisiones simétricas. El ajedrez es el abstracto más famoso del mundo.</p>
+          <p style="font-size:14px;color:var(--cream-dim);line-height:1.75">Son los mejores juegos para practicar pensamiento estratégico y los más fáciles de enseñar: no hay ningún universo ficticio que explicar.</p>
+        </div>
+        <div class="features-grid" style="grid-template-columns:1fr 1fr">
+          <div class="feature-card"><span class="feature-icon">♟️</span><p class="feature-title">Sin azar</p><p class="feature-desc">La mayoría son juegos de información perfecta. Gana el que piensa mejor.</p></div>
+          <div class="feature-card"><span class="feature-icon">🧮</span><p class="feature-title">Reglas mínimas</p><p class="feature-desc">Pocas reglas, profundidad enorme. El ajedrez tiene 6 piezas y es infinito.</p></div>
+          <div class="feature-card"><span class="feature-icon">⚖️</span><p class="feature-title">Simetría perfecta</p><p class="feature-desc">Todos empiezan igual. Las ventajas se crean durante el juego.</p></div>
+          <div class="feature-card"><span class="feature-icon">🎨</span><p class="feature-title">Diseño como arte</p><p class="feature-desc">Los abstractos modernos son objetos de diseño notables: azulejos, madera, hexágonos.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="dark-section">
+    <div class="container">
+      <p class="section-label">Títulos de referencia</p>
+      <h2 class="section-title">Abstractos <em>modernos</em> imprescindibles</h2>
+      <div class="games-grid">
+        <div class="game-card"><div class="game-card-header"><div class="game-icon">🔷</div><div class="game-meta"><p class="game-title">Azul</p><p class="game-subtitle">Michael Kiesling · Plan B Games · 2017</p></div></div><div class="game-body"><p class="game-desc">Seleccionas azulejos de colores para decorar tu tablero personal siguiendo patrones. Inspirado en los azulejos portugueses del Palacio Real de Évora. Spiel des Jahres 2018. El abstracto con la estética más bella del mercado.</p><div class="game-tags"><span class="tag tag-mech">Patrones</span><span class="tag tag-theme">Abstracto</span><span class="tag tag-easy">Fácil</span></div></div><div class="game-footer"><span class="game-rating">BGG <span>★</span> 7.9</span><span class="game-info">2–4 jugadores · 30–45 min</span></div></div>
+        <div class="game-card"><div class="game-card-header"><div class="game-icon">🐝</div><div class="game-meta"><p class="game-title">Hive</p><p class="game-subtitle">John Yianni · Gen42 Games · 2001</p></div></div><div class="game-body"><p class="game-desc">Piezas hexagonales de baquelita que representan insectos con movimientos únicos. Sin tablero: el tablero es la propia colmena que crece. Objetivo: rodear la abeja reina rival. Portable, atemporal, sin azar de ningún tipo.</p><div class="game-tags"><span class="tag tag-mech">Sin tablero</span><span class="tag tag-theme">Abstracto</span><span class="tag tag-med">Intermedio</span></div></div><div class="game-footer"><span class="game-rating">BGG <span>★</span> 7.9</span><span class="game-info">2 jugadores · 20 min</span></div></div>
+        <div class="game-card"><div class="game-card-header"><div class="game-icon">🌸</div><div class="game-meta"><p class="game-title">Sagrada</p><p class="game-subtitle">Adamescu & Andrews · Floodgate Games · 2017</p></div></div><div class="game-body"><p class="game-desc">Creas vidrieras de catedral colocando dados de colores en una cuadrícula con restricciones de adyacencia. Drafting de dados: eliges los disponibles ese turno. Los dados de cristal de colores son extraordinarios como componente.</p><div class="game-tags"><span class="tag tag-mech">Dados</span><span class="tag tag-theme">Puzzle</span><span class="tag tag-easy">Fácil</span></div></div><div class="game-footer"><span class="game-rating">BGG <span>★</span> 7.3</span><span class="game-info">1–4 jugadores · 30–45 min</span></div></div>
+        <div class="game-card"><div class="game-card-header"><div class="game-icon">🌊</div><div class="game-meta"><p class="game-title">Patchwork</p><p class="game-subtitle">Uwe Rosenberg · Lookout Games · 2014</p></div></div><div class="game-body"><p class="game-desc">Dos jugadores compran piezas de quilt para completar su manta. Las piezas cuestan botones y tiempo. La gestión simultánea de tiempo y dinero en un track compartido es brillante. El mejor juego de 2 jugadores de Rosenberg.</p><div class="game-tags"><span class="tag tag-mech">2 jugadores</span><span class="tag tag-theme">Puzzle</span><span class="tag tag-easy">Fácil</span></div></div><div class="game-footer"><span class="game-rating">BGG <span>★</span> 7.7</span><span class="game-info">2 jugadores · 15–30 min</span></div></div>
+        <div class="game-card"><div class="game-card-header"><div class="game-icon">🔲</div><div class="game-meta"><p class="game-title">Blokus</p><p class="game-subtitle">Bernard Tavitian · Sekkoia · 2000</p></div></div><div class="game-body"><p class="game-desc">Colocas poliominós en un tablero. La regla única: tu siguiente pieza debe tocar una tuya, pero solo por una esquina. Minimalismo perfecto: una sola regla con profundidad espacial enorme. Accesible para cualquier edad.</p><div class="game-tags"><span class="tag tag-mech">Poliominós</span><span class="tag tag-theme">Espacial</span><span class="tag tag-easy">Fácil</span></div></div><div class="game-footer"><span class="game-rating">BGG <span>★</span> 7.1</span><span class="game-info">2–4 jugadores · 20–30 min</span></div></div>
+        <div class="game-card"><div class="game-card-header"><div class="game-icon">🌐</div><div class="game-meta"><p class="game-title">Ingenious (Genial)</p><p class="game-subtitle">Reiner Knizia · Kosmos · 2004</p></div></div><div class="game-body"><p class="game-desc">Colocas fichas dobles de colores en un tablero hexagonal creando cadenas. Tu puntuación final es tu color más bajo, no el más alto. Esto fuerza una estrategia equilibrada. Uno de los diseños más elegantes de Knizia.</p><div class="game-tags"><span class="tag tag-mech">Hexágonos</span><span class="tag tag-theme">Abstracto</span><span class="tag tag-easy">Fácil</span></div></div><div class="game-footer"><span class="game-rating">BGG <span>★</span> 7.3</span><span class="game-info">1–4 jugadores · 45 min</span></div></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- FILLERS -->
+<div id="cat-filler" class="cat-section">
+  <section>
+    <div class="container">
+      <div class="cat-badge"><span class="cat-badge-dot" style="background:var(--gold)"></span>Fillers · Juegos rápidos de calidad</div>
+      <div class="two-col">
+        <div>
+          <p class="section-label">Definición</p>
+          <h2 class="section-title">Grandes juegos en <em>pequeños</em> formatos</h2>
+          <p class="section-sub">Juegos de 15–30 minutos ideales mientras esperan el plato principal, al inicio de una noche o como cierre. No son juegos menores: son géneros propios.</p>
+          <p style="font-size:14px;color:var(--cream-dim);line-height:1.75">También llamados <em style="color:var(--cream)">gateway games</em> cuando sirven como puerta de entrada al hobby. La mayoría son solo cartas y caben en un bolsillo.</p>
+        </div>
+        <div class="features-grid" style="grid-template-columns:1fr 1fr">
+          <div class="feature-card"><span class="feature-icon">📦</span><p class="feature-title">Formato mínimo</p><p class="feature-desc">Caben en una bolsa. Setup en 2 minutos. Perfectos para cualquier lugar.</p></div>
+          <div class="feature-card"><span class="feature-icon">⏱️</span><p class="feature-title">15–30 minutos</p><p class="feature-desc">Ideales para llenar tiempo entre juegos o cuando el grupo quiere algo rápido.</p></div>
+          <div class="feature-card"><span class="feature-icon">🎓</span><p class="feature-title">Gateway games</p><p class="feature-desc">Muchos fillers son la mejor introducción al hobby para no-jugadores.</p></div>
+          <div class="feature-card"><span class="feature-icon">♾️</span><p class="feature-title">Muy rejugables</p><p class="feature-desc">Al ser cortos, se juegan varias veces seguidas. La rejugabilidad es clave.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="dark-section">
+    <div class="container">
+      <p class="section-label">Títulos de referencia</p>
+      <h2 class="section-title">Fillers <em>que vale la pena</em> tener</h2>
+      <div class="games-grid">
+        <div class="game-card"><div class="game-card-header"><div class="game-icon">🍣</div><div class="game-meta"><p class="game-title">Sushi Go!</p><p class="game-subtitle">Phil Walker-Harding · Gamewright · 2013</p></div></div><div class="game-body"><p class="game-desc">Drafting de cartas con platos de sushi japonés. Tomas una carta y pasas tu mano. 3 rondas, 20 minutos. Ilustraciones adorables. Uno de los mejores introductores al drafting como concepto mecánico.</p><div class="game-tags"><span class="tag tag-mech">Drafting</span><span class="tag tag-theme">Japonés</span><span class="tag tag-easy">Fácil</span></div></div><div class="game-footer"><span class="game-rating">BGG <span>★</span> 7.3</span><span class="game-info">2–5 jugadores · 15–20 min</span></div></div>
+        <div class="game-card"><div class="game-card-header"><div class="game-icon">💖</div><div class="game-meta"><p class="game-title">Love Letter</p><p class="game-subtitle">Seiji Kanai · AEG · 2012</p></div></div><div class="game-body"><p class="game-desc">16 cartas, hasta 6 jugadores, 20 minutos. Intentas ser el jugador con la carta de mayor valor al final o eliminar a todos. Deducción, faroleo y suerte perfectamente balanceados. El filler más elegante del hobby moderno.</p><div class="game-tags"><span class="tag tag-mech">Deducción</span><span class="tag tag-theme">Medieval</span><span class="tag tag-easy">Fácil</span></div></div><div class="game-footer"><span class="game-rating">BGG <span>★</span> 7.2</span><span class="game-info">2–6 jugadores · 20 min</span></div></div>
+        <div class="game-card"><div class="game-card-header"><div class="game-icon">💀</div><div class="game-meta"><p class="game-title">Skull</p><p class="game-subtitle">Hervé Marly · Lui-Même · 2011</p></div></div><div class="game-body"><p class="game-desc">Cada jugador tiene 4 discos (3 flores, 1 calavera). Apuestas cuántas flores puedes voltear sin encontrar una calavera. Bluff puro sin suerte: tú decides qué pusiste. El bar game más elegante convertido en juego de mesa.</p><div class="game-tags"><span class="tag tag-mech">Bluff</span><span class="tag tag-theme">Abstracto</span><span class="tag tag-easy">Fácil</span></div></div><div class="game-footer"><span class="game-rating">BGG <span>★</span> 7.2</span><span class="game-info">3–6 jugadores · 15–45 min</span></div></div>
+        <div class="game-card"><div class="game-card-header"><div class="game-icon">🔢</div><div class="game-meta"><p class="game-title">6 Nimmt! (Category 5)</p><p class="game-subtitle">Wolfgang Kramer · Amigo Spiele · 1994</p></div></div><div class="game-body"><p class="game-desc">Simultáneamente todos eligen una carta. Las cartas se colocan en 4 filas en orden ascendente. Si eres el 6to en una fila, la tomas (y suman penalizaciones). Clásico atemporal para hasta 10 jugadores.</p><div class="game-tags"><span class="tag tag-mech">Simultáneo</span><span class="tag tag-theme">Cartas</span><span class="tag tag-easy">Fácil</span></div></div><div class="game-footer"><span class="game-rating">BGG <span>★</span> 7.1</span><span class="game-info">2–10 jugadores · 45 min</span></div></div>
+        <div class="game-card"><div class="game-card-header"><div class="game-icon">🎪</div><div class="game-meta"><p class="game-title">No Thanks!</p><p class="game-subtitle">Thorsten Gimmler · Amigo Spiele · 2004</p></div></div><div class="game-body"><p class="game-desc">Una carta numerada en el centro. Puedes tomarla o poner un chip y pasarla. Las series de números consecutivos valen solo el menor. La regla más simple del hobby con uno de los mejores dilemas de decisión.</p><div class="game-tags"><span class="tag tag-mech">Push-your-luck</span><span class="tag tag-theme">Cartas</span><span class="tag tag-easy">Fácil</span></div></div><div class="game-footer"><span class="game-rating">BGG <span>★</span> 7.1</span><span class="game-info">3–7 jugadores · 20 min</span></div></div>
+        <div class="game-card"><div class="game-card-header"><div class="game-icon">🌋</div><div class="game-meta"><p class="game-title">Incan Gold (Diamant)</p><p class="game-subtitle">Faidutti & Moon · Schmidt · 2005</p></div></div><div class="game-body"><p class="game-desc">Exploras una pirámide cada ronda. Simultáneamente decides: seguir adentro o salir con tus gemas. Los que se quedan reparten las nuevas; los que salen las guardan. Push-your-luck social perfecto. La codicia como mecánica.</p><div class="game-tags"><span class="tag tag-mech">Push-your-luck</span><span class="tag tag-theme">Exploración</span><span class="tag tag-easy">Fácil</span></div></div><div class="game-footer"><span class="game-rating">BGG <span>★</span> 7.0</span><span class="game-info">3–8 jugadores · 20–30 min</span></div></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- HISTORIA -->
+<section id="historia" style="background:var(--navy-deeper);border-top:1px solid var(--border)">
+  <div class="container">
+    <div class="two-col">
+      <div>
+        <p class="section-label">Historia del hobby</p>
+        <h2 class="section-title">De Alemania <em>al mundo</em></h2>
+        <p class="section-sub">El hobby moderno nació en Europa y viajó al mundo entero. Esta es la línea de tiempo que explica cómo llegamos a tener miles de juegos publicados cada año.</p>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item"><p class="timeline-year">1979 — Alemania</p><p class="timeline-title">Nace el Spiel des Jahres</p><p class="timeline-text">El primer Premio al Juego del Año alemán se otorga a Hare &amp; Tortoise de David Parlett. El premio se convierte en el estándar de calidad del hobby y define el modelo "eurojuego".</p></div>
+        <div class="timeline-item"><p class="timeline-year">1995 — Klaus Teuber</p><p class="timeline-title">Catan lo cambia todo</p><p class="timeline-text">Los Colonos de Catán vende millones de copias y exporta el modelo alemán al mundo. Por primera vez un juego moderno se vende en aeropuertos y librerías generalistas.</p></div>
+        <div class="timeline-item"><p class="timeline-year">2000 — Fantasy Flight Games</p><p class="timeline-title">Nace el Ameritrash moderno</p><p class="timeline-text">FFG publica Twilight Imperium 2ª Ed. y sienta las bases del juego temático americano: miniaturas, narrativa épica y partidas de horas que se convierten en eventos sociales.</p></div>
+        <div class="timeline-item"><p class="timeline-year">2007–2012 — La madurez</p><p class="timeline-title">Agricola, Dominion y el auge</p><p class="timeline-text">Agricola (2007) y Dominion (2008, primer deckbuilder) abren nuevas categorías. Kickstarter (2009) democratiza la publicación. BoardGameGeek consolida la comunidad global.</p></div>
+        <div class="timeline-item"><p class="timeline-year">2019–Hoy — Era dorada</p><p class="timeline-title">Wingspan, Ark Nova y la diversidad</p><p class="timeline-text">Diseñadoras como Elizabeth Hargrave entran al hobby con propuestas nuevas. El mercado latinoamericano crece con distribuidores como Devir México y Marludico publicando en español.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RUTA -->
+<section id="ruta">
+  <div class="container">
+    <p class="section-label">Tu camino</p>
+    <h2 class="section-title">¿Por dónde <em>empezar</em>?</h2>
+    <p class="section-sub">Si nunca has jugado un juego moderno, esta ruta te lleva de cero a jugador frecuente sin quemarte en el proceso.</p>
+    <div class="path-grid">
+      <div class="path-step"><span class="path-number">01</span><p class="path-title">Un filler para calentar</p><p class="path-desc">Empieza con algo que se explica en 5 minutos y se juega en 20. Reglas mínimas, diversión garantizada.</p><p class="path-game">Love Letter o Sushi Go!</p></div>
+      <div class="path-step"><span class="path-number">02</span><p class="path-title">Tu primer gateway game</p><p class="path-desc">Un juego con un poco más de profundidad pero muy accesible. 45–60 minutos, reglas en 15 min.</p><p class="path-game">Ticket to Ride o Codenames</p></div>
+      <div class="path-step"><span class="path-number">03</span><p class="path-title">Elige tu categoría</p><p class="path-desc">¿Te gustó más el sistema o la historia? Eso define si vas por euros, ameritrash o cooperativos.</p><p class="path-game">Wingspan o Pandemic</p></div>
+      <div class="path-step"><span class="path-number">04</span><p class="path-title">Profundidad media</p><p class="path-desc">Ya entiendes los conceptos básicos. Es hora de un juego de 90 minutos con más sistemas encadenados.</p><p class="path-game">Agricola o Spirit Island</p></div>
+      <div class="path-step"><span class="path-number">05</span><p class="path-title">El juego pesado</p><p class="path-desc">El destino final. 2–3 horas, decisiones complejas, satisfacción máxima al dominar el sistema.</p><p class="path-game">Brass: Birmingham o Ark Nova</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section class="dark-section" id="quiz" style="padding:80px 5vw">
+  <div class="container">
+    <div class="two-col">
+      <div>
+        <p class="section-label">Encuentra tu juego</p>
+        <h2 class="section-title">¿Cuál es tu<br><em>primer</em> juego?</h2>
+        <p class="section-sub" style="margin-bottom:0">Responde 4 preguntas y te recomendamos el título perfecto para ti y tu grupo, con información real verificada en BGG.</p>
+      </div>
+      <div>
+        <div class="quiz-box">
+          <div class="quiz-prog" id="qprog">
+            <div class="quiz-dot active" id="qd0"></div>
+            <div class="quiz-dot" id="qd1"></div>
+            <div class="quiz-dot" id="qd2"></div>
+            <div class="quiz-dot" id="qd3"></div>
+          </div>
+          <p class="quiz-q" id="qq">¿Cuánto tiempo tienen para jugar?</p>
+          <div class="quiz-options" id="qopts">
+            <button class="quiz-opt" onclick="qsel(this,0)"><span class="quiz-opt-letter">A</span>20–30 minutos (algo rápido)</button>
+            <button class="quiz-opt" onclick="qsel(this,1)"><span class="quiz-opt-letter">B</span>45–75 minutos</button>
+            <button class="quiz-opt" onclick="qsel(this,2)"><span class="quiz-opt-letter">C</span>90 minutos o más</button>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center">
+            <button class="qbtn" id="qnext" onclick="qnext()" disabled>Siguiente →</button>
+          </div>
+          <div class="qresult" id="qresult">
+            <p class="qresult-cat" id="qr-cat"></p>
+            <p class="qresult-title" id="qr-title"></p>
+            <p class="qresult-desc" id="qr-desc"></p>
+            <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+              <button class="qbtn" onclick="qreset()">Intentar de nuevo</button>
+              <a class="qbtn-out" href="https://chambiclub.com/tienda">Ver en la tienda →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-section">
+  <div class="container">
+    <p style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem">Chambi Club · Ciudad de México</p>
+    <h2 class="cta-title">Listos para jugar</h2>
+    <p class="cta-sub">Todos los títulos de esta guía y muchos más disponibles en nuestra tienda. Envíos a toda la República Mexicana.</p>
+    <div class="cta-buttons">
+      <a class="btn-gold" href="https://chambiclub.com/tienda">Explorar catálogo</a>
+      <a class="btn-out" href="mailto:hola@chambiclub.com">Escribirnos</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-logo">Chambi Club</span>
+    <span class="footer-note">chambiclub.com — Información verificada · BoardGameGeek 2024</span>
+  </div>
+</footer>
+
+<script>
+var QS=[
+  {q:'¿Cuánto tiempo tienen para jugar?',opts:['20–30 minutos (algo rápido)','45–75 minutos','90 minutos o más']},
+  {q:'¿Cuántas personas juegan?',opts:['2 personas','3–4 personas','5 o más personas']},
+  {q:'¿Qué prefieren?',opts:['Algo cooperativo, todos juntos','Competencia estratégica, sin combate','Conflicto directo, traición, drama']},
+  {q:'¿Experiencia previa con juegos modernos?',opts:['Primera vez, nunca hemos jugado','Hemos jugado Catan o algo similar','Jugamos con frecuencia']}
+];
+var RS=[
+  ['Love Letter','Fácil · 15 min · 2–6 jugadores','Solo 16 cartas y 20 minutos. Deducción, faroleo y tensión perfectamente balanceados. El filler más elegante para empezar cualquier noche.'],
+  ['Hanabi','Cooperativo · 25 min · 2–5 jugadores','Sostienes tus cartas al revés. Los demás ven tu mano, tú no. Comunicación restringida y tensión máxima en un formato mínimo. Spiel des Jahres 2013.'],
+  ['Ticket to Ride','Euro ligero · 45–75 min · 2–5 jugadores','El gateway game más popular del mundo. Construyes rutas de tren, coleccionas cartas y bloqueas a tus rivales. Spiel des Jahres 2004.'],
+  ['Pandemic','Cooperativo · 45–60 min · 2–4 jugadores','Todos contra el juego. Tu equipo debe salvar el mundo de 4 enfermedades. El cooperativo que popularizó el género. Accesible desde la primera partida.'],
+  ['Codenames','Party · 20–30 min · 4–8 jugadores','Dos equipos, pistas de una palabra, palabras secretas que adivinar. Spiel des Jahres 2016. El party game más inteligente del mercado.'],
+  ['Just One','Party · 20–30 min · 3–7 jugadores','Cooperativo donde todos escriben UNA pista. Las pistas repetidas se cancelan. Spiel des Jahres 2019. Ideal para grupos sin experiencia previa.'],
+  ['7 Wonders','Euro ligero · 30–45 min · 2–7 jugadores','Drafting simultáneo de civilizaciones antiguas. 7 jugadores juegan al mismo tiempo sin esperas. Kennerspiel 2011. Alta densidad de decisiones en poco tiempo.'],
+  ['Wingspan','Euro medio · 40–70 min · 1–5 jugadores','El euro más accesible de su generación. Construyes un motor de aves con datos ornitológicos reales. Kennerspiel 2019. Tema hermoso, mecánicas sólidas.'],
+  ['Agricola','Euro medio · 90 min · 1–5 jugadores','El euro de granja más tenso del hobby. Recursos escasos, colocación de trabajadores y la amenaza constante de no tener comida. Clásico absoluto.'],
+  ['Spirit Island','Cooperativo avanzado · 90–120 min · 1–4 jugadores','Espíritus de la naturaleza contra colonizadores. Asimétrico, profundo y muy difícil. El cooperativo más complejo y satisfactorio del mercado.'],
+  ['Brass: Birmingham','Euro avanzado · 60–120 min · 2–4 jugadores','Redes industriales en la Inglaterra victoriana. El mejor euro según BGG. Alta interdependencia, dos eras y un mercado que todos afectan.'],
+  ['Ark Nova','Euro avanzado · 90–150 min · 1–4 jugadores','Diseña un zoológico de conservación con más de 200 cartas únicas. El sistema de acciones escalables es una de las innovaciones más brillantes de la década.']
+];
+var qCur=0,qAns=[],qSel=null;
+function showCat(id,btn){
+  document.querySelectorAll('.cat-section').forEach(function(s){s.classList.remove('visible')});
+  document.querySelectorAll('.cat-btn').forEach(function(b){b.classList.remove('active')});
+  document.getElementById('cat-'+id).classList.add('visible');
+  btn.classList.add('active');
+  document.getElementById('categorias').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function toggleMech(btn){
+  var item=btn.closest('.mechanic-item');
+  var open=item.classList.contains('open');
+  document.querySelectorAll('.mechanic-item.open').forEach(function(el){el.classList.remove('open')});
+  if(!open)item.classList.add('open');
+}
+function filterCards(gridId,cat,btn){
+  btn.closest('.filter-tabs').querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active')});
+  btn.classList.add('active');
+  document.querySelectorAll('#'+gridId+' .game-card').forEach(function(c){
+    if(cat==='todos'||c.dataset.cat===cat){c.classList.remove('hidden')}else{c.classList.add('hidden')}
+  });
+}
+function qsel(btn,idx){
+  document.querySelectorAll('.quiz-opt').forEach(function(b){b.classList.remove('selected')});
+  btn.classList.add('selected');
+  qSel=idx;
+  document.getElementById('qnext').disabled=false;
+}
+function renderQ(){
+  var d=QS[qCur];
+  document.getElementById('qq').textContent=d.q;
+  var opts=document.getElementById('qopts');
+  var letters=['A','B','C'];
+  opts.innerHTML=d.opts.map(function(o,i){return'<button class="quiz-opt" onclick="qsel(this,'+i+')"><span class="quiz-opt-letter">'+letters[i]+'</span>'+o+'</button>'}).join('');
+}
+function qnext(){
+  if(qSel===null)return;
+  qAns.push(qSel);
+  var dot=document.getElementById('qd'+qCur);
+  dot.classList.remove('active');
+  dot.classList.add('done');
+  qSel=null;
+  qCur++;
+  if(qCur<QS.length){
+    var nd=document.getElementById('qd'+qCur);
+    if(nd)nd.classList.add('active');
+    renderQ();
+    document.getElementById('qnext').disabled=true;
+    if(qCur===QS.length-1)document.getElementById('qnext').textContent='Ver recomendación →';
+  }else{showResult()}
+}
+function showResult(){
+  var score=qAns[0]+qAns[1]+qAns[2]*3+qAns[3]*2;
+  var idx=Math.min(Math.floor(score*(RS.length-1)/8),RS.length-1);
+  var r=RS[idx];
+  document.getElementById('qr-cat').textContent=r[1];
+  document.getElementById('qr-title').textContent=r[0];
+  document.getElementById('qr-desc').textContent=r[2];
+  ['qq','qopts','qprog'].forEach(function(id){document.getElementById(id).style.display='none'});
+  document.getElementById('qnext').style.display='none';
+  document.getElementById('qresult').style.display='block';
+}
+function qreset(){
+  qCur=0;qAns=[];qSel=null;
+  for(var i=0;i<4;i++){var d=document.getElementById('qd'+i);if(d){d.classList.remove('done','active');if(i===0)d.classList.add('active')}}
+  ['qq','qopts','qprog'].forEach(function(id){document.getElementById(id).style.display=''});
+  document.getElementById('qnext').style.display='';
+  document.getElementById('qnext').textContent='Siguiente →';
+  document.getElementById('qnext').disabled=true;
+  document.getElementById('qresult').style.display='none';
+  renderQ();
+}
+</script>
+</body>
+</html>
