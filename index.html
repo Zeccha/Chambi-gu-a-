@@ -185,7 +185,7 @@ footer{border-top:1px solid var(--border);padding:1.75rem 5vw}
       <p class="hero-intro">No todos los juegos de mesa son iguales. Desde la estrategia pura de un eurojuego hasta el caos de un party game: <strong>aquí entiendes qué es cada cosa</strong> y cuál es para ti.</p>
       <div class="hero-stats">
         <div><span class="stat-num">6</span><span class="stat-label">Categorías explicadas</span></div>
-        <div><span class="stat-num">30+</span><span class="stat-label">Juegos documentados</span></div>
+        <div><span class="stat-num">45+</span><span class="stat-label">Juegos en el quiz</span></div>
         <div><span class="stat-num">1979</span><span class="stat-label">Año de origen del hobby</span></div>
       </div>
     </div>
@@ -542,7 +542,7 @@ footer{border-top:1px solid var(--border);padding:1.75rem 5vw}
       <div>
         <p class="section-label">Encuentra tu juego</p>
         <h2 class="section-title">¿Cuál es tu<br><em>primer</em> juego?</h2>
-        <p class="section-sub" style="margin-bottom:0">Responde 4 preguntas y te recomendamos el título perfecto para ti y tu grupo, con información real verificada en BGG.</p>
+        <p class="section-sub" style="margin-bottom:0">Responde 5 preguntas y te recomendamos el título perfecto para ti y tu grupo, elegido de entre más de 45 juegos con información real verificada en BGG.</p>
       </div>
       <div>
         <div class="quiz-box">
@@ -551,6 +551,7 @@ footer{border-top:1px solid var(--border);padding:1.75rem 5vw}
             <div class="quiz-dot" id="qd1"></div>
             <div class="quiz-dot" id="qd2"></div>
             <div class="quiz-dot" id="qd3"></div>
+            <div class="quiz-dot" id="qd4"></div>
           </div>
           <p class="quiz-q" id="qq">¿Cuánto tiempo tienen para jugar?</p>
           <div class="quiz-options" id="qopts">
@@ -597,26 +598,100 @@ footer{border-top:1px solid var(--border);padding:1.75rem 5vw}
 
 <script>
 var QS=[
-  {q:'¿Cuánto tiempo tienen para jugar?',opts:['20–30 minutos (algo rápido)','45–75 minutos','90 minutos o más']},
-  {q:'¿Cuántas personas juegan?',opts:['2 personas','3–4 personas','5 o más personas']},
-  {q:'¿Qué prefieren?',opts:['Algo cooperativo, todos juntos','Competencia estratégica, sin combate','Conflicto directo, traición, drama']},
-  {q:'¿Experiencia previa con juegos modernos?',opts:['Primera vez, nunca hemos jugado','Hemos jugado Catan o algo similar','Jugamos con frecuencia']}
+  {q:'¿Cuánto tiempo tienen para jugar?',dim:'time',opts:[
+    {t:'20–30 minutos (algo rápido)',v:0},
+    {t:'45–75 minutos',v:1},
+    {t:'90 minutos o más',v:2}
+  ]},
+  {q:'¿Cuántas personas van a jugar?',dim:'players',opts:[
+    {t:'Somos 2',v:0},
+    {t:'3 o 4 personas',v:1},
+    {t:'5 o más personas',v:2}
+  ]},
+  {q:'¿Qué dinámica buscan?',dim:'mode',opts:[
+    {t:'Cooperar, todos contra el juego',v:0},
+    {t:'Competir con estrategia, sin ataques directos',v:1},
+    {t:'Conflicto directo, traición y drama',v:2}
+  ]},
+  {q:'¿Qué tanto han jugado juegos modernos?',dim:'exp',opts:[
+    {t:'Primera vez, nunca hemos jugado',v:0},
+    {t:'Algo como Catan, UNO o Carcassonne',v:1},
+    {t:'Jugamos seguido, queremos reto',v:2}
+  ]},
+  {q:'¿Qué les llama más?',dim:'feel',opts:[
+    {t:'Una historia y un mundo que vivir',v:0},
+    {t:'Un sistema y mecánicas que dominar',v:1}
+  ]}
 ];
-var RS=[
-  ['Love Letter','Fácil · 15 min · 2–6 jugadores','Solo 16 cartas y 20 minutos. Deducción, faroleo y tensión perfectamente balanceados. El filler más elegante para empezar cualquier noche.'],
-  ['Hanabi','Cooperativo · 25 min · 2–5 jugadores','Sostienes tus cartas al revés. Los demás ven tu mano, tú no. Comunicación restringida y tensión máxima en un formato mínimo. Spiel des Jahres 2013.'],
-  ['Ticket to Ride','Euro ligero · 45–75 min · 2–5 jugadores','El gateway game más popular del mundo. Construyes rutas de tren, coleccionas cartas y bloqueas a tus rivales. Spiel des Jahres 2004.'],
-  ['Pandemic','Cooperativo · 45–60 min · 2–4 jugadores','Todos contra el juego. Tu equipo debe salvar el mundo de 4 enfermedades. El cooperativo que popularizó el género. Accesible desde la primera partida.'],
-  ['Codenames','Party · 20–30 min · 4–8 jugadores','Dos equipos, pistas de una palabra, palabras secretas que adivinar. Spiel des Jahres 2016. El party game más inteligente del mercado.'],
-  ['Just One','Party · 20–30 min · 3–7 jugadores','Cooperativo donde todos escriben UNA pista. Las pistas repetidas se cancelan. Spiel des Jahres 2019. Ideal para grupos sin experiencia previa.'],
-  ['7 Wonders','Euro ligero · 30–45 min · 2–7 jugadores','Drafting simultáneo de civilizaciones antiguas. 7 jugadores juegan al mismo tiempo sin esperas. Kennerspiel 2011. Alta densidad de decisiones en poco tiempo.'],
-  ['Wingspan','Euro medio · 40–70 min · 1–5 jugadores','El euro más accesible de su generación. Construyes un motor de aves con datos ornitológicos reales. Kennerspiel 2019. Tema hermoso, mecánicas sólidas.'],
-  ['Agricola','Euro medio · 90 min · 1–5 jugadores','El euro de granja más tenso del hobby. Recursos escasos, colocación de trabajadores y la amenaza constante de no tener comida. Clásico absoluto.'],
-  ['Spirit Island','Cooperativo avanzado · 90–120 min · 1–4 jugadores','Espíritus de la naturaleza contra colonizadores. Asimétrico, profundo y muy difícil. El cooperativo más complejo y satisfactorio del mercado.'],
-  ['Brass: Birmingham','Euro avanzado · 60–120 min · 2–4 jugadores','Redes industriales en la Inglaterra victoriana. El mejor euro según BGG. Alta interdependencia, dos eras y un mercado que todos afectan.'],
-  ['Ark Nova','Euro avanzado · 90–150 min · 1–4 jugadores','Diseña un zoológico de conservación con más de 200 cartas únicas. El sistema de acciones escalables es una de las innovaciones más brillantes de la década.']
+var GAMES=[
+  {n:'Love Letter',meta:'Filler · 20 min · 2–6 jugadores',d:'Solo 16 cartas. Deducción y faroleo perfectos para abrir cualquier noche. El filler más elegante para empezar.',p:{time:0,pl:[2,6],mode:1,exp:0,feel:0.5}},
+  {n:'Sushi Go!',meta:'Filler · 15–20 min · 2–5 jugadores',d:'Drafting de cartas de sushi adorable. La mejor forma de entender el "drafting" en 20 minutos. Ideal con niños y novatos.',p:{time:0,pl:[2,5],mode:1,exp:0,feel:1}},
+  {n:'The Mind',meta:'Cooperativo · 15–20 min · 2–4 jugadores',d:'Jueguen cartas del 1 al 100 en orden ascendente sin hablar ni señalar. Suena imposible; genera momentos mágicos de sincronía.',p:{time:0,pl:[2,4],mode:0,exp:0,feel:1}},
+  {n:'Skull',meta:'Filler · 15–30 min · 3–6 jugadores',d:'Bluff puro sin azar: apuestas cuántas flores volteas sin topar una calavera. El juego de farol más simple y perfecto.',p:{time:0,pl:[3,6],mode:2,exp:0,feel:0.5}},
+  {n:'No Thanks!',meta:'Filler · 20 min · 3–7 jugadores',d:'Tomas la carta o pones una ficha y la pasas. Una sola regla, uno de los mejores dilemas del hobby. Atemporal.',p:{time:0,pl:[3,7],mode:1,exp:0,feel:1}},
+  {n:'Incan Gold',meta:'Push-your-luck · 20–30 min · 3–8 jugadores',d:'Sigues dentro del templo por más gemas o sales a salvo. La codicia colectiva como mecánica. Genial en grupo grande.',p:{time:0,pl:[3,8],mode:2,exp:0,feel:0}},
+  {n:'6 Nimmt!',meta:'Filler · 30–45 min · 2–10 jugadores',d:'Todos eligen carta a la vez y se acomodan en filas. Evita ser el sexto. Caos controlado para hasta 10 personas.',p:{time:0,pl:[4,10],mode:1,exp:0,feel:1}},
+  {n:'Codenames',meta:'Party · 20–30 min · 4–8 jugadores',d:'Dos equipos, pistas de una sola palabra, agentes que descubrir. Spiel des Jahres 2016. El party más inteligente que existe.',p:{time:0,pl:[4,8],mode:2,exp:0,feel:0.5}},
+  {n:'Just One',meta:'Party cooperativo · 20 min · 3–7 jugadores',d:'Todos escriben UNA pista, las repetidas se cancelan. Spiel des Jahres 2019. Perfecto para grupos sin experiencia.',p:{time:0,pl:[3,7],mode:0,exp:0,feel:0.5}},
+  {n:'Wavelength',meta:'Party · 30–45 min · 2–12 jugadores',d:'Adivinen dónde cae un concepto en un espectro entre dos opuestos. Genera debates y risas inesperadas en grupo.',p:{time:1,pl:[4,12],mode:2,exp:0,feel:0}},
+  {n:'Dixit',meta:'Party · 30 min · 3–6 jugadores',d:'Cartas surrealistas y pistas poéticas que algunos (no todos) deben adivinar. Spiel des Jahres 2010. Para grupos creativos.',p:{time:0,pl:[3,6],mode:2,exp:0,feel:0}},
+  {n:'Coup',meta:'Party · 15 min · 3–6 jugadores',d:'Miente sobre tus cartas para ejecutar acciones brutales. Si te cachan, pierdes. Faroleo adictivo en 15 minutos.',p:{time:0,pl:[3,6],mode:2,exp:1,feel:0.5}},
+  {n:'Ticket to Ride',meta:'Euro ligero · 45–75 min · 2–5 jugadores',d:'Construye rutas de tren conectando ciudades. Spiel des Jahres 2004. El gateway más popular del mundo, reglas en 15 min.',p:{time:1,pl:[2,5],mode:1,exp:1,feel:1}},
+  {n:'Catan',meta:'Euro ligero · 60–90 min · 3–4 jugadores',d:'Coloniza la isla, produce recursos y comercia. El clásico que abrió el hobby moderno al mundo entero.',p:{time:1,pl:[3,4],mode:1,exp:1,feel:0.5}},
+  {n:'Carcassonne',meta:'Euro ligero · 30–45 min · 2–5 jugadores',d:'Coloca losetas para construir el mapa y reclama ciudades y caminos. Spiel des Jahres 2001. Sencillo y profundo.',p:{time:0,pl:[2,5],mode:1,exp:1,feel:1}},
+  {n:'Azul',meta:'Abstracto · 30–45 min · 2–4 jugadores',d:'Selecciona azulejos de colores para completar patrones. Spiel des Jahres 2018. El abstracto más bello del mercado.',p:{time:1,pl:[2,4],mode:1,exp:1,feel:1}},
+  {n:'7 Wonders',meta:'Euro ligero · 30–45 min · 2–7 jugadores',d:'Drafting simultáneo de civilizaciones: hasta 7 juegan sin esperas. Kennerspiel 2011. Mucha decisión en poco tiempo.',p:{time:0,pl:[3,7],mode:1,exp:1,feel:1}},
+  {n:'Splendor',meta:'Euro ligero · 30 min · 2–4 jugadores',d:'Junta gemas y compra cartas que te dan descuentos en cadena. El motor económico más limpio para empezar.',p:{time:0,pl:[2,4],mode:1,exp:1,feel:1}},
+  {n:'Cascadia',meta:'Euro ligero · 30–45 min · 1–4 jugadores',d:'Forma ecosistemas del noroeste con losetas y fauna. Spiel des Jahres 2022. Relajante, elegante y muy rejugable.',p:{time:1,pl:[1,4],mode:1,exp:1,feel:1}},
+  {n:'Sagrada',meta:'Abstracto · 30–45 min · 1–4 jugadores',d:'Crea vidrieras colocando dados de colores con restricciones. Drafting de dados precioso a la vista.',p:{time:1,pl:[1,4],mode:1,exp:1,feel:1}},
+  {n:'Patchwork',meta:'Abstracto · 15–30 min · 2 jugadores',d:'El mejor juego para 2: compran piezas de quilt gestionando tiempo y botones a la vez. Puzzle adictivo de Rosenberg.',p:{time:0,pl:[2,2],mode:1,exp:1,feel:1}},
+  {n:'Wingspan',meta:'Euro medio · 40–70 min · 1–5 jugadores',d:'Construye un motor de aves con datos reales en cada carta. Kennerspiel 2019. El euro medio más accesible y bello.',p:{time:1,pl:[1,5],mode:1,exp:1,feel:1}},
+  {n:'Everdell',meta:'Euro medio · 40–80 min · 1–4 jugadores',d:'Coloca trabajadores y construye una ciudad de criaturas del bosque. Producción preciosa y combos satisfactorios.',p:{time:1,pl:[1,4],mode:1,exp:1,feel:0.5}},
+  {n:'Viticulture',meta:'Euro medio · 45–90 min · 1–6 jugadores',d:'Gestiona una viña italiana por estaciones. Colocación de trabajadores con tempo elegante. Gran puerta al peso medio.',p:{time:1,pl:[1,6],mode:1,exp:2,feel:1}},
+  {n:'Lost Ruins of Arnak',meta:'Euro medio · 90–120 min · 1–4 jugadores',d:'Mezcla exploración, deckbuilding y colocación de trabajadores en una isla perdida. Híbrido moderno muy querido.',p:{time:2,pl:[1,4],mode:1,exp:2,feel:0.5}},
+  {n:'The Castles of Burgundy',meta:'Euro medio · 60–90 min · 1–4 jugadores',d:'Dados y losetas para desarrollar tu principado. Un clásico de optimización pura. Eterno favorito de los euro-fans.',p:{time:1,pl:[1,4],mode:1,exp:2,feel:1}},
+  {n:'Dune: Imperium',meta:'Euro medio · 60–120 min · 1–4 jugadores',d:'Deckbuilding + colocación de trabajadores con algo de conflicto. Top 5 de BGG. El híbrido de moda con tema fuerte.',p:{time:2,pl:[1,4],mode:1,exp:2,feel:0.5}},
+  {n:'Brass: Birmingham',meta:'Euro avanzado · 60–120 min · 2–4 jugadores',d:'Redes industriales en la Inglaterra victoriana. #1 en BGG por años. Interdependencia brutal y máxima profundidad.',p:{time:2,pl:[2,4],mode:1,exp:2,feel:1}},
+  {n:'Ark Nova',meta:'Euro avanzado · 90–150 min · 1–4 jugadores',d:'Diseña un zoológico de conservación con 200+ cartas. Top 5 de BGG. El euro más ambicioso de la década.',p:{time:2,pl:[1,4],mode:1,exp:2,feel:1}},
+  {n:'Terraforming Mars',meta:'Euro avanzado · 120 min · 1–5 jugadores',d:'Corporaciones compiten por hacer Marte habitable. Motor de cartas enorme y rejugabilidad casi infinita.',p:{time:2,pl:[1,5],mode:1,exp:2,feel:0.5}},
+  {n:'Agricola',meta:'Euro avanzado · 90 min · 1–5 jugadores',d:'Granja medieval con recursos brutalmente escasos y bocas que alimentar. Colocación de trabajadores en su cima.',p:{time:2,pl:[1,5],mode:1,exp:2,feel:1}},
+  {n:'Pandemic',meta:'Cooperativo · 45–60 min · 2–4 jugadores',d:'Todos contra 4 enfermedades que se extienden por el mundo. El coop que popularizó el género. Fácil de aprender.',p:{time:1,pl:[2,4],mode:0,exp:1,feel:0.5}},
+  {n:'Forbidden Island',meta:'Cooperativo · 30 min · 2–4 jugadores',d:'Recuperen tesoros antes de que la isla se hunda. El coop gateway por excelencia, barato y rapidísimo de enseñar.',p:{time:0,pl:[2,4],mode:0,exp:0,feel:0.5}},
+  {n:'The Crew',meta:'Cooperativo · 20 min · 2–5 jugadores',d:'Bazas cooperativas con comunicación casi prohibida. 50 misiones progresivas. Kennerspiel 2020. Para amantes de cartas.',p:{time:0,pl:[2,5],mode:0,exp:1,feel:1}},
+  {n:'Hanabi',meta:'Cooperativo · 25 min · 2–5 jugadores',d:'Ves la mano de los demás pero no la tuya. Construyan fuegos artificiales con pistas limitadas. Spiel des Jahres 2013.',p:{time:0,pl:[2,5],mode:0,exp:0,feel:1}},
+  {n:'Mysterium',meta:'Cooperativo · 45 min · 2–7 jugadores',d:'Un fantasma comunica visiones ilustradas; los médiums resuelven el crimen. Rol asimétrico precioso para no-jugadores.',p:{time:1,pl:[3,7],mode:0,exp:0,feel:0}},
+  {n:'Spirit Island',meta:'Cooperativo avanzado · 90–120 min · 1–4 jugadores',d:'Espíritus de la naturaleza expulsan colonizadores. Asimétrico y muy difícil. El coop más profundo del mercado.',p:{time:2,pl:[1,4],mode:0,exp:2,feel:1}},
+  {n:'Pandemic Legacy',meta:'Campaña cooperativa · 60 min · 2–4 jugadores',d:'Una campaña de 12–24 partidas que cambia para siempre. Una de las mejores experiencias narrativas del hobby.',p:{time:1,pl:[2,4],mode:0,exp:2,feel:0}},
+  {n:'Betrayal at House on the Hill',meta:'Temático · 60–90 min · 3–6 jugadores',d:'Exploran una mansión que se arma sola hasta que uno se vuelve el traidor. 50 escenarios distintos. Terror y sorpresa.',p:{time:1,pl:[3,6],mode:2,exp:1,feel:0}},
+  {n:'Nemesis',meta:'Temático · 90–180 min · 1–5 jugadores',d:'Survival sci-fi tipo Alien con objetivos secretos. Semi-cooperativo: a veces necesitas que otro falle. Tensión extrema.',p:{time:2,pl:[1,5],mode:2,exp:2,feel:0}},
+  {n:'Mansions of Madness',meta:'Temático · 120–180 min · 1–5 jugadores',d:'Exploración lovecraftiana guiada por app que narra y mueve monstruos. Coop con mucha atmósfera y puzzles.',p:{time:2,pl:[1,5],mode:0,exp:1,feel:0}},
+  {n:'Gloomhaven',meta:'Temático avanzado · 90–120 min · 1–4 jugadores',d:'Campaña cooperativa de dungeon crawling con 17 clases y 95+ escenarios. #1 en BGG por 4 años. Una bestia épica.',p:{time:2,pl:[1,4],mode:0,exp:2,feel:0}},
+  {n:'Twilight Imperium',meta:'Temático épico · 4–8 horas · 3–6 jugadores',d:'Guerra galáctica con diplomacia, economía y política. No se juega, se vive. Un evento social de día completo.',p:{time:2,pl:[3,6],mode:2,exp:2,feel:0}},
+  {n:'7 Wonders Duel',meta:'Euro 2 jugadores · 30 min · 2 jugadores',d:'La versión para dos de 7 Wonders, y para muchos mejor que el original. Tres caminos a la victoria, tensión constante.',p:{time:0,pl:[2,2],mode:1,exp:1,feel:1}},
+  {n:'The Lord of the Rings: Duel for Middle-earth',meta:'Euro 2 jugadores · 30–45 min · 2 jugadores',d:'Duelo asimétrico en la Tierra Media con drafting tenso. Uno de los mejores juegos para dos de los últimos años.',p:{time:1,pl:[2,2],mode:2,exp:1,feel:0.5}},
+  {n:'Hive',meta:'Abstracto · 20 min · 2 jugadores',d:'Insectos hexagonales sin tablero: rodea la abeja reina rival. Portátil, sin azar, atemporal. Ajedrez moderno.',p:{time:0,pl:[2,2],mode:1,exp:1,feel:1}}
 ];
 var qCur=0,qAns=[],qSel=null;
+function scoreGame(g,ans){
+  var s=0;
+  s+=Math.abs(g.p.time-ans.time)*3;
+  var target=ans.players===0?2:ans.players===1?4:6;
+  var lo=g.p.pl[0],hi=g.p.pl[1];
+  if(target<lo)s+=(lo-target)*1.5;else if(target>hi)s+=(target-hi)*1.5;
+  s+=Math.abs(g.p.mode-ans.mode)*3;
+  s+=Math.abs(g.p.exp-ans.exp)*2.5;
+  s+=Math.abs(g.p.feel-ans.feel)*2;
+  return s;
+}
+function recommend(ans){
+  var bestScore=Infinity,ties=[];
+  for(var i=0;i<GAMES.length;i++){
+    var sc=scoreGame(GAMES[i],ans);
+    if(sc<bestScore){bestScore=sc;ties=[GAMES[i]];}
+    else if(sc===bestScore){ties.push(GAMES[i]);}
+  }
+  return ties[Math.floor(Math.random()*ties.length)];
+}
 function showCat(id,btn){
   document.querySelectorAll('.cat-section').forEach(function(s){s.classList.remove('visible')});
   document.querySelectorAll('.cat-btn').forEach(function(b){b.classList.remove('active')});
@@ -648,16 +723,14 @@ function renderQ(){
   document.getElementById('qq').textContent=d.q;
   var opts=document.getElementById('qopts');
   var letters=['A','B','C'];
-  opts.innerHTML=d.opts.map(function(o,i){return'<button class="quiz-opt" onclick="qsel(this,'+i+')"><span class="quiz-opt-letter">'+letters[i]+'</span>'+o+'</button>'}).join('');
+  opts.innerHTML=d.opts.map(function(o,i){return'<button class="quiz-opt" onclick="qsel(this,'+i+')"><span class="quiz-opt-letter">'+letters[i]+'</span>'+o.t+'</button>'}).join('');
 }
 function qnext(){
   if(qSel===null)return;
-  qAns.push(qSel);
+  qAns.push(QS[qCur].opts[qSel].v);
   var dot=document.getElementById('qd'+qCur);
-  dot.classList.remove('active');
-  dot.classList.add('done');
-  qSel=null;
-  qCur++;
+  dot.classList.remove('active');dot.classList.add('done');
+  qSel=null;qCur++;
   if(qCur<QS.length){
     var nd=document.getElementById('qd'+qCur);
     if(nd)nd.classList.add('active');
@@ -667,19 +740,18 @@ function qnext(){
   }else{showResult()}
 }
 function showResult(){
-  var score=qAns[0]+qAns[1]+qAns[2]*3+qAns[3]*2;
-  var idx=Math.min(Math.floor(score*(RS.length-1)/8),RS.length-1);
-  var r=RS[idx];
-  document.getElementById('qr-cat').textContent=r[1];
-  document.getElementById('qr-title').textContent=r[0];
-  document.getElementById('qr-desc').textContent=r[2];
+  var ans={time:qAns[0],players:qAns[1],mode:qAns[2],exp:qAns[3],feel:qAns[4]};
+  var r=recommend(ans);
+  document.getElementById('qr-cat').textContent=r.meta;
+  document.getElementById('qr-title').textContent=r.n;
+  document.getElementById('qr-desc').textContent=r.d;
   ['qq','qopts','qprog'].forEach(function(id){document.getElementById(id).style.display='none'});
   document.getElementById('qnext').style.display='none';
   document.getElementById('qresult').style.display='block';
 }
 function qreset(){
   qCur=0;qAns=[];qSel=null;
-  for(var i=0;i<4;i++){var d=document.getElementById('qd'+i);if(d){d.classList.remove('done','active');if(i===0)d.classList.add('active')}}
+  for(var i=0;i<QS.length;i++){var d=document.getElementById('qd'+i);if(d){d.classList.remove('done','active');if(i===0)d.classList.add('active')}}
   ['qq','qopts','qprog'].forEach(function(id){document.getElementById(id).style.display=''});
   document.getElementById('qnext').style.display='';
   document.getElementById('qnext').textContent='Siguiente →';
